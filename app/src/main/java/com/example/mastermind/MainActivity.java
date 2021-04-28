@@ -1,13 +1,23 @@
 package com.example.mastermind;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.speech.SpeechRecognizer;
 import android.util.Log;
+import android.widget.EditText;
 
 import java.util.ArrayList;
 import java.util.List;
 public class MainActivity extends AppCompatActivity {
+    public static final Integer RecordAudioRequestFlag = 1;
+    private SpeechRecognizer speechRecognizer;
+
     private UserDao userDao;
     private AppDatabase appDatabase;
     @Override
@@ -32,5 +42,21 @@ public class MainActivity extends AppCompatActivity {
         for(int i=0;i<10;i++) {
             Log.d("geo", geographyQuest[i].getQuestion()+" ");
         }
+
+
+        //speech recognition
+
+        //check for permissions
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED){
+            checkPermission();
+        }
+
+    }
+
+    private void checkPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            //ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.RECORD_AUDIO},RecordAudioRequestCode);
+        }
+
     }
 }

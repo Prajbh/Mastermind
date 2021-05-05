@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/startFragment2">
+    <fragment
+        android:id="@+id/startFragment2"
+        android:name="com.example.mastermind.startFragment"
+        android:label="fragment_start"
+        tools:layout="@layout/fragment_start" >
+        <action
+            android:id="@+id/action_startFragment2_to_registerFragment2"
+            app:destination="@id/registerFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment2"
+        android:name="com.example.mastermind.registerFragment"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/action_registerFragment2_to_subjectFragment2"
+            app:destination="@id/subjectFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/subjectFragment2"
+        android:name="com.example.mastermind.subjectFragment"
+        android:label="fragment_subject"
+        tools:layout="@layout/fragment_subject" />
+</navigation>

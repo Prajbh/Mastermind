@@ -11,7 +11,12 @@
         tools:layout="@layout/fragment_start" >
         <action
             android:id="@+id/action_startFragment2_to_registerFragment2"
-            app:destination="@id/registerFragment2" />
+            app:destination="@id/registerFragment2"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_close_exit"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment2"
@@ -20,7 +25,11 @@
         tools:layout="@layout/fragment_register" >
         <action
             android:id="@+id/action_registerFragment2_to_subjectFragment2"
-            app:destination="@id/subjectFragment2" />
+            app:destination="@id/subjectFragment2"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_close_exit"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/subjectFragment2"

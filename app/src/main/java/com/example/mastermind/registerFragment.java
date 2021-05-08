@@ -44,7 +44,7 @@ public class registerFragment extends Fragment {
         regBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navController.navigate(R.id.action_registerFragment2_to_subjectFragment2);
+                navController.navigate(R.id.action_registerFragment2_to_ageFragment);
             }
         });
     }

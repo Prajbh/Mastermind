@@ -41,13 +41,12 @@ public class subjectFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         navController = Navigation.findNavController(view);
-        Button moviesBtn = view.findViewById(R.id.movies);
-        moviesBtn.setOnClickListener(new View.OnClickListener() {
+        Button geoBtn = view.findViewById(R.id.geo);
+        geoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // start a example quiz
-                navController.navigate(R.id.action_subjectFragment2_to_questionsFragment);
-
+                navController.navigate(R.id.action_subjectFragment2_to_geoQuestionFragment);
             }
         });
     }

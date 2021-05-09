@@ -33,8 +33,8 @@
         android:label="fragment_subject"
         tools:layout="@layout/fragment_subject" >
         <action
-            android:id="@+id/action_subjectFragment2_to_questionsFragment"
-            app:destination="@id/questionsFragment" />
+            android:id="@+id/action_subjectFragment2_to_geoQuestionFragment"
+            app:destination="@id/geoQuestionFragment" />
     </fragment>
     <fragment
         android:id="@+id/ageFragment"
@@ -46,8 +46,8 @@
             app:destination="@id/subjectFragment2" />
     </fragment>
     <fragment
-        android:id="@+id/questionsFragment"
-        android:name="com.example.mastermind.questionsFragment"
+        android:id="@+id/geoQuestionFragment"
+        android:name="com.example.mastermind.geoQuestionFragment"
         android:label="fragment_questions"
         tools:layout="@layout/fragment_questions" />
 </navigation>

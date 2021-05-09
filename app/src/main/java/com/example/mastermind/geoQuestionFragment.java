@@ -25,6 +25,7 @@ public class geoQuestionFragment extends Fragment {
     private TextView question;
     private RadioButton optionC;
     Questions[] geographyQuest;
+    private int quest;
 
     NavController navController;
 

@@ -3,48 +3,31 @@ package com.example.mastermind;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link subjectFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class subjectFragment extends Fragment {
 
+    NavController navController;
+    
 
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    private String mParam1;
-    private String mParam2;
+
 
     public subjectFragment() {
         // Required empty public constructor
     }
 
 
-
-    public static subjectFragment newInstance(String param1, String param2) {
-        subjectFragment fragment = new subjectFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -52,5 +35,20 @@ public class subjectFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_subject, container, false);
+
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        navController = Navigation.findNavController(view);
+        Button moviesBtn = view.findViewById(R.id.movies);
+        moviesBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // start a example quiz
+                navController.navigate(R.id.action_subjectFragment2_to_questionsFragment);
+
+            }
+        });
     }
 }

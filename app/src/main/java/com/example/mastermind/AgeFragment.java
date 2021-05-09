@@ -38,15 +38,14 @@ public class AgeFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
         navController = Navigation.findNavController(view);
-        /*
-        Button startBtn = view.findViewById(R.id.startButton);
-        startBtn.setOnClickListener(new View.OnClickListener() {
+        Button childBtn = view.findViewById(R.id.child);
+        childBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navController.navigate(R.id.action_startFragment2_to_registerFragment2);
+                navController.navigate(R.id.action_ageFragment_to_subjectFragment2);
             }
         });
 
-         */
+
     }
 }

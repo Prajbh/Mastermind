@@ -23,23 +23,37 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import android.view.View;
+
 
 public class MainActivity extends AppCompatActivity {
+
     public static final Integer RecordAudioRequestFlag = 1;
     private SpeechRecognizer speechRecognizer;
 
     private EditText editText;
     private ImageView micButton;
 
-    //private UserDao userDao;
-    //private AppDatabase appDatabase;
-
+    private UserDao userDao;
+    private AppDatabase appDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        View decorView = getWindow().getDecorView();
+        decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
+        //creates database and populates
+        appDatabase=AppDatabase.getAppDatabase(MainActivity.this);
+        userDao=appDatabase.userDao();
+        userDao.nukeTable();
+
+
+        Questions[] geographyQuest = userDao.loadByCategory("Geography");
+        for (int i = 0; i < 8; i++) {
+            Log.d("geo", geographyQuest[i].getQuestion() + " " );
+            Log.d("geo",geographyQuest[i].getAnswer() + " " );
+
+        }
 
         //creates database and populates
         appDatabase=AppDatabase.getAppDatabase(MainActivity.this);
@@ -67,8 +81,8 @@ public class MainActivity extends AppCompatActivity {
             checkPermission();
         }
 
-        editText = findViewById(R.id.editTextTextPersonName);
-        micButton = findViewById(R.id.imageView);
+        //editText = findViewById(R.id.editTextTextPersonName);
+        micButton = findViewById(R.id.cardView12);
 
         speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
 

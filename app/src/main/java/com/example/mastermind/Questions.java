@@ -8,7 +8,10 @@ public class Questions {
     @PrimaryKey(autoGenerate = true)
     private int uid;
 
+
     @ColumnInfo(name="catagory")
+
+
     private String category;
 
     @ColumnInfo(name="questions")
@@ -44,11 +47,17 @@ public class Questions {
         this.question=question;
     }
 
+
+    public void setAnswer(String answer) {
+        this.answer=answer;
+    }
+
     public String getAnswer()
     {
         return answer;
     }
-    public void setAnswer(String actual_question) {this.answer=answer; }
+
 }
+
 
 

@@ -1,6 +1,7 @@
 package com.example.mastermind;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -21,6 +22,17 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.GoogleAuthProvider;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -33,8 +45,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private EditText editText;
     private ImageView micButton;
+    private FirebaseAuth mAuth;
     private EditText login_UserName, login_Password;
     private Button login, register;
+    private static final int SIGNIN = 1;
+    private GoogleSignInClient client;
 
     private UserDao userDao;
     private AppDatabase appDatabase;
@@ -58,6 +73,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         login.setOnClickListener(this);
         register.setOnClickListener(this);
+
+        configureSignIn();
 
 
         Questions[] geographyQuest = userDao.loadByCategory("Geography");
@@ -172,6 +189,59 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+    }
+
+    private void configureSignIn() {
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken("969262305380-b4gok644spmqui0bv8v5e8npa52tat5k.apps.googleusercontent.com")
+                .requestEmail().build();
+        client = GoogleSignIn.getClient(this, gso);
+
+    }
+
+    private void signToGoogle() {
+        Intent signinIntent = client.getSignInIntent();
+        startActivityForResult(signinIntent, SIGNIN);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == SIGNIN){
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            handledSignIn(task);
+
+        }
+    }
+
+    private void firebaseauthwithGoogle(String idToken){
+        AuthCredential credencial = GoogleAuthProvider.getCredential(idToken, null);
+        mAuth.signInWithCredential(credencial)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+
+                            //task is successfull
+
+                        }
+                        else{
+                            //task not successfull
+                        }
+                    }
+                });
+    }
+
+    private void handledSignIn(Task<GoogleSignInAccount> task){
+
+        try{
+            GoogleSignInAccount account = task.getResult();
+            firebaseauthwithGoogle(account.getIdToken());
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override

@@ -17,6 +17,15 @@ public class Questions {
     @ColumnInfo(name="answer")
     private String answer;
 
+    @ColumnInfo(name="wrongAns1")
+    private String wrongAns1;
+
+    @ColumnInfo(name="wrongAns2")
+    private String wrongAns2;
+
+    @ColumnInfo(name="wrongAns3")
+    private String wrongAns3;
+
     public int getUid()
     {
         return uid;
@@ -51,5 +60,15 @@ public class Questions {
     {
         return answer;
     }
+
+    public void setWrongAns1(String wrongAns1){this.wrongAns1=wrongAns1;}
+    public String getWrongAns1(){return wrongAns1;}
+
+    public void setWrongAns2(String wrongAns2){this.wrongAns2=wrongAns2;}
+    public String getWrongAns2(){return wrongAns2;}
+
+    public void setWrongAns3(String wrongAns3){this.wrongAns3=wrongAns3;}
+    public String getWrongAns3(){return wrongAns3;}
+
 }
 

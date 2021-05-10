@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/night"
+
+        tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="93dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/bubble"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textQuestion"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:lineSpacingExtra="6dp"
+            android:text="What is your age group?"
+            android:textColor="#332FA2"
+            android:textSize="26sp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/gradeSchooler"
+        android:layout_width="258dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/bgpurple"
+        android:paddingBottom="10dp"
+        android:text="5-12 years"
+        android:textAllCaps="false"
+        android:textColor="@color/colorPurple"
+        android:textSize="28sp"
+        app:backgroundTint="@null" />
+
+    <Button
+        android:id="@+id/teen"
+        android:layout_width="258dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/bgpurple"
+        android:paddingBottom="10dp"
+        android:text="12-18 years"
+        android:textAllCaps="false"
+        android:textColor="@color/colorPurple"
+        android:textSize="28sp"
+        app:backgroundTint="@null" />
+
+    <Button
+        android:id="@+id/adult"
+        android:layout_width="258dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/bgpurple"
+        android:paddingBottom="10dp"
+        android:text="18+ years"
+        android:textAllCaps="false"
+        android:textColor="@color/colorPurple"
+        android:textSize="28sp"
+        app:backgroundTint="@null" />
+
+
+</LinearLayout>

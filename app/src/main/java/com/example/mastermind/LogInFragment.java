@@ -11,10 +11,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 
-public class LogInFragment extends Fragment {
+import java.net.Authenticator;
+
+public class LogInFragment extends Fragment implements View.OnClickListener{
 
     NavController navController;
+    private EditText name, email, password;
+    private Button register;
+    Authenticator mAuth;
+
 
 
     public LogInFragment() {
@@ -26,6 +33,8 @@ public class LogInFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
 
 
     }
@@ -54,5 +63,10 @@ public class LogInFragment extends Fragment {
                 navController.navigate(R.id.action_logInFragment_to_signUpFragment);
             }
         });
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }

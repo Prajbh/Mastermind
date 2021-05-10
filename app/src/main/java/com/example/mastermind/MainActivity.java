@@ -16,6 +16,7 @@ import android.speech.RecognitionListener;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -25,13 +26,15 @@ import java.util.List;
 import java.util.Locale;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     public static final Integer RecordAudioRequestFlag = 1;
     private SpeechRecognizer speechRecognizer;
 
     private EditText editText;
     private ImageView micButton;
+    private EditText login_UserName, login_Password;
+    private Button login, register;
 
     private UserDao userDao;
     private AppDatabase appDatabase;
@@ -46,6 +49,15 @@ public class MainActivity extends AppCompatActivity {
         appDatabase=AppDatabase.getAppDatabase(MainActivity.this);
         userDao=appDatabase.userDao();
         userDao.nukeTable();
+
+        login_UserName = (EditText) findViewById(R.id.userName);
+        login_Password = (EditText) findViewById(R.id.passWord);
+
+        login = (Button) findViewById(R.id.logInBtn);
+        register = (Button) findViewById(R.id.regBtn);
+
+        login.setOnClickListener(this);
+        register.setOnClickListener(this);
 
 
         Questions[] geographyQuest = userDao.loadByCategory("Geography");
@@ -182,6 +194,18 @@ public class MainActivity extends AppCompatActivity {
             if(grantResults[0] == PackageManager.PERMISSION_GRANTED)
                 Toast.makeText(this,"Permission Granted",Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        switch(v.getId()){
+            case R.id.logInBtn:
+                break;
+            case R.id.regBtn:
+                break;
+        }
+
     }
 }
 

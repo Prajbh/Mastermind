@@ -8,7 +8,10 @@ public class Questions {
     @PrimaryKey(autoGenerate = true)
     private int uid;
 
-    @ColumnInfo(name="category")
+
+    @ColumnInfo(name="catagory")
+
+
     private String category;
 
     @ColumnInfo(name="questions")
@@ -16,15 +19,6 @@ public class Questions {
 
     @ColumnInfo(name="answer")
     private String answer;
-
-    @ColumnInfo(name="wrongAns1")
-    private String wrongAns1;
-
-    @ColumnInfo(name="wrongAns2")
-    private String wrongAns2;
-
-    @ColumnInfo(name="wrongAns3")
-    private String wrongAns3;
 
     public int getUid()
     {
@@ -53,22 +47,17 @@ public class Questions {
         this.question=question;
     }
 
+
     public void setAnswer(String answer) {
         this.answer=answer;
     }
+
     public String getAnswer()
     {
         return answer;
     }
 
-    public void setWrongAns1(String wrongAns1){this.wrongAns1=wrongAns1;}
-    public String getWrongAns1(){return wrongAns1;}
-
-    public void setWrongAns2(String wrongAns2){this.wrongAns2=wrongAns2;}
-    public String getWrongAns2(){return wrongAns2;}
-
-    public void setWrongAns3(String wrongAns3){this.wrongAns3=wrongAns3;}
-    public String getWrongAns3(){return wrongAns3;}
-
 }
+
+
 

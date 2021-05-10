@@ -8,6 +8,7 @@ import androidx.room.Query;
 
 import com.example.mastermind.Questions;
 
+
 import java.util.List;
 import java.util.ArrayList;
 @Dao
@@ -21,13 +22,15 @@ public interface UserDao {
     @Delete
     void delete(Questions questions);
 
-    @Query("SELECT * FROM questions WHERE category LIKE:subject")
+
+    @Query("select * from QUESTIONS where questions.catagory like :catagory LIMIT 10 ")
+    Questions[] getCatagory(String catagory);
+
+    @Query("SELECT * FROM questions WHERE catagory LIKE:subject")
     public Questions[] loadByCategory(String subject);
 
     @Query("Delete FROM Questions")
     public void nukeTable();
 
-
-
-
 }
+

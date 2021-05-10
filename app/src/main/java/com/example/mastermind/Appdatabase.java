@@ -8,17 +8,20 @@ import androidx.room.RoomDatabase;
 abstract class AppDatabase extends RoomDatabase {
     private static AppDatabase INSTANCE;
 
-    public abstract com.example.mastermind.UserDao userDao();
+    public abstract UserDao userDao();
 
     public static AppDatabase getAppDatabase(Context context) {
         if (INSTANCE == null) {
             synchronized (AppDatabase.class) {
                 if (INSTANCE == null) {
-                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, "triviaQuestions.db").allowMainThreadQueries().build();
+                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, "questions.db").allowMainThreadQueries().build();
                 }
             }
         }
         return INSTANCE;
     }
 
+    public static void destroyinstance() {
+        INSTANCE = null;
+    }
 }

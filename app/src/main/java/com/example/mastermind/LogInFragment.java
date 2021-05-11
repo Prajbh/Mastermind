@@ -17,6 +17,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.SignInButton;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -25,9 +28,17 @@ import java.net.Authenticator;
 public class LogInFragment extends Fragment implements View.OnClickListener{
 
     NavController navController;
+    private View rootview;
     private EditText name, email, password;
     private Button register;
-    Authenticator mAuth;
+    //Authenticator mAuth;
+    private FirebaseAuth mAuth;
+    private EditText login_UserName, login_Password;
+    private Button login;
+    private static final int SIGNIN = 1;
+    private SignInButton signinbutton;
+    private GoogleSignInOptions options;
+    private GoogleSignInClient client;
 
     //private UserViewModel userViewModel;
     private SavedStateHandle savedStateHandle;
@@ -44,7 +55,6 @@ public class LogInFragment extends Fragment implements View.OnClickListener{
         super.onCreate(savedInstanceState);
 
 
-
     }
 
 
@@ -52,6 +62,9 @@ public class LogInFragment extends Fragment implements View.OnClickListener{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_log_in, container, false);
+        //initialise firebase
+
+        //mAuth = FirebaseAuth.getInstance();
     }
 
     @Override
@@ -65,9 +78,9 @@ public class LogInFragment extends Fragment implements View.OnClickListener{
         navController = Navigation.findNavController(view);
         Button logInBtn = view.findViewById(R.id.logInBtn);
         Button regBtn = view.findViewById(R.id.regBtn);
-        EditText name = view.findViewById(R.id.userName);
+        /*EditText name = view.findViewById(R.id.userName);
         EditText email = view.findViewById(R.id.email);
-        EditText password = view.findViewById(R.id.passWord);
+        EditText password = view.findViewById(R.id.passWord);*/
 
         //mAuth = FirebaseAuth.getInstance();
 
@@ -75,9 +88,9 @@ public class LogInFragment extends Fragment implements View.OnClickListener{
         logInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String get_username = name.getText().toString();
+                /*String get_username = name.getText().toString();
                 String get_password = password.getText().toString();
-                login(get_username, get_password);
+                login(get_username, get_password); */
                 navController.navigate(R.id.action_logInFragment_to_ageFragment);
             }
         });

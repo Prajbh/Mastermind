@@ -1,29 +1,27 @@
 package com.example.mastermind;
 
-import android.media.MediaPlayer;
 import android.os.Bundle;
-
-import androidx.appcompat.view.menu.ActionMenuItemView;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.SavedStateHandle;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
-
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.SavedStateHandle;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-
-import java.net.Authenticator;
 
 public class LogInFragment extends Fragment implements View.OnClickListener{
 
@@ -78,26 +76,35 @@ public class LogInFragment extends Fragment implements View.OnClickListener{
         navController = Navigation.findNavController(view);
         Button logInBtn = view.findViewById(R.id.logInBtn);
         Button regBtn = view.findViewById(R.id.regBtn);
-        /*EditText name = view.findViewById(R.id.userName);
-        EditText email = view.findViewById(R.id.email);
-        EditText password = view.findViewById(R.id.passWord);*/
-
-        //mAuth = FirebaseAuth.getInstance();
 
 
-        logInBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                /*String get_username = name.getText().toString();
-                String get_password = password.getText().toString();
-                login(get_username, get_password); */
-                navController.navigate(R.id.action_logInFragment_to_ageFragment);
-            }
-        });
+        mAuth = FirebaseAuth.getInstance();
+
+
+
         regBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //mAuth.createUserWithEmailAndPassword(s1,s2).addOnCompleteListener(new MediaPlayer.OnCompletionListener<AuthResult>());
+
+                TextInputLayout x= (TextInputLayout) getActivity().findViewById(R.id.userName);
+                name = x.getEditText();
+                TextInputLayout y= (TextInputLayout) getActivity().findViewById(R.id.passWord);
+                password = y.getEditText();
+                String get_username = name.getText().toString();
+                String get_password = password.getText().toString();
+                mAuth.createUserWithEmailAndPassword(get_username, get_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+                            Log.d("INFORMATION", "successfully inserted");
+                            System.out.println("Successfully inserted");
+                        }
+                        else{
+                            Log.d("INFORMATION", "unsuccessfulinserted");
+                            System.out.println("not inserted");
+                        }
+                    }
+                });
                 navController.navigate(R.id.action_logInFragment_to_signUpFragment);
             }
         });

@@ -5,7 +5,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 @Database(entities={Questions.class},version=1,exportSchema=false)
-public abstract class AppDatabase extends RoomDatabase {
+abstract class AppDatabase extends RoomDatabase {
     private static AppDatabase INSTANCE;
 
     public abstract UserDao userDao();

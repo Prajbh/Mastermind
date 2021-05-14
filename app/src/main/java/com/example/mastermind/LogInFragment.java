@@ -51,8 +51,6 @@ public class LogInFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
     }
 
 
@@ -85,27 +83,32 @@ public class LogInFragment extends Fragment implements View.OnClickListener{
         regBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 TextInputLayout x= (TextInputLayout) getActivity().findViewById(R.id.userName);
                 name = x.getEditText();
                 TextInputLayout y= (TextInputLayout) getActivity().findViewById(R.id.passWord);
                 password = y.getEditText();
                 String get_username = name.getText().toString();
                 String get_password = password.getText().toString();
+                /*
                 mAuth.createUserWithEmailAndPassword(get_username, get_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            Log.d("INFORMATION", "successfully inserted");
-                            System.out.println("Successfully inserted");
+                            //Log.d("INFORMATION", "successfully inserted");
+                            //System.out.println("Successfully inserted");
                         }
                         else{
-                            Log.d("INFORMATION", "unsuccessfulinserted");
-                            System.out.println("not inserted");
+                            //Log.d("INFORMATION", "unsuccessfulinserted");
+                            //System.out.println("not inserted");
                         }
                     }
                 });
+                */
+
                 navController.navigate(R.id.action_logInFragment_to_signUpFragment);
+
+
+
             }
         });
     }

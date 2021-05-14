@@ -48,21 +48,25 @@ public class SignUpFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
+
         navController = Navigation.findNavController(view);
-        Button logInBtn = view.findViewById(R.id.logInBtn);
-        Button regBtn = view.findViewById(R.id.regBtn);
-        logInBtn.setOnClickListener(new View.OnClickListener() {
+        Button regBtn = view.findViewById(R.id.newUserBtn);
+
+        regBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 navController.navigate(R.id.action_logInFragment_to_ageFragment);
             }
         });
+        /*
         regBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 navController.navigate(R.id.action_logInFragment_to_signUpFragment);
             }
         });
+        */
+
     }
 
 

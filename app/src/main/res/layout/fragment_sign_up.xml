@@ -37,7 +37,7 @@
         app:layout_constraintVertical_bias="0.78" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/userName"
+        android:id="@+id/userName22"
         android:layout_width="250dp"
         android:layout_height="55dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -55,7 +55,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/passWord"
+        android:id="@+id/passWord22"
         android:layout_width="250dp"
         android:layout_height="55dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -66,14 +66,11 @@
         app:layout_constraintVertical_bias="0.659">
 
 
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="250dp"
+            android:layout_height="55dp"
+            android:hint="Enter Password" />
     </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:layout_width="250dp"
-        android:layout_height="55dp"
-        android:hint="Enter Password"
-        tools:layout_editor_absoluteX="66dp"
-        tools:layout_editor_absoluteY="446dp" />
 
     <EditText
         android:id="@+id/email"

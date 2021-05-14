@@ -26,6 +26,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
@@ -38,7 +39,7 @@ import java.util.List;
 import java.util.Locale;
 
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity {
 
     public static final Integer RecordAudioRequestFlag = 1;
     private SpeechRecognizer speechRecognizer;
@@ -49,6 +50,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private EditText login_UserName, login_Password;
     private Button login, register;
     private static final int SIGNIN = 1;
+    private SignInButton signinbutton;
+    private GoogleSignInOptions options;
     private GoogleSignInClient client;
 
     private UserDao userDao;
@@ -60,24 +63,89 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         View decorView = getWindow().getDecorView();
         decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
+
         //creates database and populates
-        appDatabase=AppDatabase.getAppDatabase(MainActivity.this);
-        userDao=appDatabase.userDao();
+        appDatabase = AppDatabase.getAppDatabase(MainActivity.this);
+        userDao = appDatabase.userDao();
         userDao.nukeTable();
 
-        login_UserName = (EditText) findViewById(R.id.userName);
-        login_Password = (EditText) findViewById(R.id.passWord);
+        //login_UserName = (EditText) findViewById(R.id.userName);
+        //login_Password = (EditText) findViewById(R.id.passWord);
+        //login = (Button) findViewById(R.id.logInBtn);
+        //register = (Button) findViewById(R.id.regBtn);
 
-        login = (Button) findViewById(R.id.logInBtn);
-        register = (Button) findViewById(R.id.regBtn);
+        /*signinbutton = (SignInButton) findViewById(R.id.button);
+        signinbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signToGoogle();
+            }
+        });
 
-        login.setOnClickListener(this);
-        register.setOnClickListener(this);
+        //login.setOnClickListener(this);
+        //register.setOnClickListener(this);
 
-        configureSignIn();
+        configureSignIn();*/
+    }
+/*
+    //start of google sign in
+    private void configureSignIn() {
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken("969262305380-b4gok644spmqui0bv8v5e8npa52tat5k.apps.googleusercontent.com")
+                .requestEmail().build();
+        client = GoogleSignIn.getClient(this, gso);
 
+    }
 
-        Questions[] geographyQuest = userDao.loadByCategory("Geography");
+    private void signToGoogle() {
+        Intent signinIntent = client.getSignInIntent();
+        startActivityForResult(signinIntent, SIGNIN);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == SIGNIN){
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            handledSignIn(task);
+
+        }
+    }
+
+    private void firebaseauthwithGoogle(String idToken){
+        AuthCredential credencial = GoogleAuthProvider.getCredential(idToken, null);
+        mAuth.signInWithCredential(credencial)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+
+                            //task is successfull
+
+                        }
+                        else{
+                            //task not successfull
+                        }
+                    }
+                });
+    }
+
+    private void handledSignIn(Task<GoogleSignInAccount> task){
+
+        try{
+            GoogleSignInAccount account = task.getResult();
+            firebaseauthwithGoogle(account.getIdToken());
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    //end of google sign-in
+*/
+
+        /*Questions[] geographyQuest = userDao.loadByCategory("Geography");
         for (int i = 0; i < 8; i++) {
             Log.d("geo", geographyQuest[i].getQuestion() + " " );
             Log.d("geo",geographyQuest[i].getAnswer() + " " );
@@ -103,8 +171,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Log.d("geo", geographyQuest[i].getQuestion() + " ");
         }
 
-        //speech recognition
 
+         */
+        //speech recognition start
+        /*
         //check for permissions
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED){
             checkPermission();
@@ -191,58 +261,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    private void configureSignIn() {
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken("969262305380-b4gok644spmqui0bv8v5e8npa52tat5k.apps.googleusercontent.com")
-                .requestEmail().build();
-        client = GoogleSignIn.getClient(this, gso);
-
-    }
-
-    private void signToGoogle() {
-        Intent signinIntent = client.getSignInIntent();
-        startActivityForResult(signinIntent, SIGNIN);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if(requestCode == SIGNIN){
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            handledSignIn(task);
-
-        }
-    }
-
-    private void firebaseauthwithGoogle(String idToken){
-        AuthCredential credencial = GoogleAuthProvider.getCredential(idToken, null);
-        mAuth.signInWithCredential(credencial)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-
-                            //task is successfull
-
-                        }
-                        else{
-                            //task not successfull
-                        }
-                    }
-                });
-    }
-
-    private void handledSignIn(Task<GoogleSignInAccount> task){
-
-        try{
-            GoogleSignInAccount account = task.getResult();
-            firebaseauthwithGoogle(account.getIdToken());
-        }
-        catch(Exception e){
-            e.printStackTrace();
-        }
-    }
 
     @Override
     protected void onDestroy() {
@@ -250,6 +268,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         speechRecognizer.destroy();
     }
 
+    //for speech
     private void checkPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO},RecordAudioRequestFlag);
@@ -257,6 +276,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    //for speech
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -266,7 +286,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    @Override
+    //end of speech code
+    */
+
+
+
+
+
+   /* @Override
     public void onClick(View v) {
 
         switch(v.getId()){
@@ -276,7 +303,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
 
-    }
+    }*/
 }
 
 

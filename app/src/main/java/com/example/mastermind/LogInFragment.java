@@ -90,8 +90,8 @@ public class LogInFragment extends Fragment implements View.OnClickListener{
                 name = x.getEditText();
                 TextInputLayout y= (TextInputLayout) getActivity().findViewById(R.id.passWord);
                 password = y.getEditText();
-                String get_username = name.getText().toString();
-                String get_password = password.getText().toString();
+                String get_username = name.getText().toString().trim();
+                String get_password = password.getText().toString().trim();
                 mAuth.createUserWithEmailAndPassword(get_username, get_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {

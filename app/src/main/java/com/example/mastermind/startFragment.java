@@ -1,19 +1,14 @@
 package com.example.mastermind;
 
-import android.app.FragmentManager;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.NavDirections;
-import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.Button;
+
+import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 
 public class startFragment extends Fragment {
@@ -52,7 +47,7 @@ public class startFragment extends Fragment {
         startBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navController.navigate(R.id.action_startFragment2_to_logInFragment);
+                navController.navigate(R.id.action_subjectFragment2_to_geoQuestionFragment);
 
             }
         });

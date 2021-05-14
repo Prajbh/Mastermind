@@ -1,12 +1,15 @@
 package com.example.mastermind;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
+import android.speech.SpeechRecognizer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,6 +22,9 @@ public class questionsFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private ImageView micButton;
+    public static final Integer RecordAudioRequestFlag = 1;
+    private SpeechRecognizer speechRecognizer;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -61,4 +67,132 @@ public class questionsFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_questions, container, false);
     }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+/*
+        //speech recognition start
+
+        //check for permissions
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+            checkPermission();
+        }
+
+        //editText = findViewById(R.id.editTextTextPersonName);
+        micButton = getView().findViewById(R.id.cardView12);
+
+        speechRecognizer = SpeechRecognizer.createSpeechRecognizer(getContext());
+
+
+
+        final Intent speechRecognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+
+
+        speechRecognizer.setRecognitionListener(new RecognitionListener() {
+            @Override
+            public void onReadyForSpeech(Bundle params) {
+
+            }
+
+
+            @Override
+            public void onBeginningOfSpeech() {
+                //editText.setText("Mic");
+                //editText.setHint("Listening..");
+
+            }
+
+            @Override
+            public void onRmsChanged(float rmsdB) {
+
+            }
+
+            @Override
+            public void onBufferReceived(byte[] buffer) {
+
+            }
+
+            @Override
+            public void onEndOfSpeech() {
+
+            }
+
+            @Override
+            public void onError(int error) {
+
+            }
+
+            @Override
+            public void onResults(Bundle results) {
+
+                //micButton.setImageResource(R.drawable.);
+                ArrayList<String> data = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+                //editText.setText(data.get(0));
+
+            }
+
+            @Override
+            public void onPartialResults(Bundle partialResults) {
+
+            }
+
+            @Override
+            public void onEvent(int eventType, Bundle params) {
+
+            }
+
+        });
+
+        micButton.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    speechRecognizer.stopListening();
+                }
+
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    //micButton.setImageResource(R.drawable.avatars);
+
+                    speechRecognizer.startListening(speechRecognizerIntent);
+                }
+                return false;
+            }
+        });
+
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        speechRecognizer.destroy();
+    }
+
+    //for speech
+    private void checkPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO}, RecordAudioRequestFlag);
+        }
+
+    }
+
+        //for speech
+        @Override
+        public void onRequestPermissionsResult ( int requestCode, @NonNull String[] permissions,
+        @NonNull int[] grantResults){
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+            if (requestCode == RecordAudioRequestFlag && grantResults.length > 0) {
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                //Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show();
+            }
+
+            //end of speech code
+
+        }*/
+    }
+
 }

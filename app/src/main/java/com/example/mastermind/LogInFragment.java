@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -37,10 +38,10 @@ public class LogInFragment extends Fragment implements View.OnClickListener{
     private SignInButton signinbutton;
     private GoogleSignInOptions options;
     private GoogleSignInClient client;
-
+    private FirebaseAuth mauth;
     //private UserViewModel userViewModel;
     private SavedStateHandle savedStateHandle;
-
+    private TextInputLayout x,y;
 
     public LogInFragment() {
 
@@ -51,7 +52,7 @@ public class LogInFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        mauth=FirebaseAuth.getInstance();
 
     }
 
@@ -76,35 +77,30 @@ public class LogInFragment extends Fragment implements View.OnClickListener{
         navController = Navigation.findNavController(view);
         Button logInBtn = view.findViewById(R.id.logInBtn);
         Button regBtn = view.findViewById(R.id.regBtn);
+        x=getView().findViewById(R.id.userName);
+        y=getView().findViewById(R.id.passWord);
+        logInBtn.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            String s1, s2;
+                                            s1 = x.getEditText().getText().toString().trim();
+                                            s2 = y.getEditText().getText().toString().trim();
+                                            mauth.signInWithEmailAndPassword(s1, s2).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                                    if (task.isSuccessful()) {
+                                                        Toast.makeText(getActivity(), "User login was successful", Toast.LENGTH_LONG).show();
 
-
-        mAuth = FirebaseAuth.getInstance();
-
-
-
+                                                    } else {
+                                                        Toast.makeText(getActivity(), "User login was unsuccessful", Toast.LENGTH_LONG).show();
+                                                    }
+                                                }
+                                            });
+                                        }
+                                    });
         regBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                TextInputLayout x= (TextInputLayout) getActivity().findViewById(R.id.userName);
-                name = x.getEditText();
-                TextInputLayout y= (TextInputLayout) getActivity().findViewById(R.id.passWord);
-                password = y.getEditText();
-                String get_username = name.getText().toString();
-                String get_password = password.getText().toString();
-                mAuth.createUserWithEmailAndPassword(get_username, get_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            Log.d("INFORMATION", "successfully inserted");
-                            System.out.println("Successfully inserted");
-                        }
-                        else{
-                            Log.d("INFORMATION", "unsuccessfulinserted");
-                            System.out.println("not inserted");
-                        }
-                    }
-                });
                 navController.navigate(R.id.action_logInFragment_to_signUpFragment);
             }
         });
@@ -121,7 +117,7 @@ public class LogInFragment extends Fragment implements View.OnClickListener{
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(View view) {
 
     }
 }

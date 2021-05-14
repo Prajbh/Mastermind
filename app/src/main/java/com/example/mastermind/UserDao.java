@@ -23,10 +23,10 @@ public interface UserDao {
     void delete(Questions questions);
 
 
-    @Query("select * from QUESTIONS where questions.catagory like :catagory LIMIT 10 ")
+    @Query("select * from QUESTIONS where questions.category like :catagory LIMIT 10 ")
     Questions[] getCatagory(String catagory);
 
-    @Query("SELECT * FROM questions WHERE catagory LIKE:subject")
+    @Query("SELECT * FROM questions WHERE category LIKE:subject")
     public Questions[] loadByCategory(String subject);
 
     @Query("Delete FROM Questions")

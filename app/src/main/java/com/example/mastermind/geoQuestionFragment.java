@@ -120,7 +120,6 @@ public class geoQuestionFragment extends Fragment {
     }
 
     public void showNextQuestion(Questions[] geographyQuest) {
-        //showSolution.setVisibility(View.INVISIBLE);
         optionA.setTextColor(textColorDefaultRb);
         optionB.setTextColor(textColorDefaultRb);
         optionC.setTextColor(textColorDefaultRb);
@@ -163,7 +162,6 @@ public class geoQuestionFragment extends Fragment {
     public void checkAnswers(Questions[] geographyQuest) {
         isAnswered = true;
         countDownTimer.cancel();
-
 
         if (optionA.isChecked()) {
             if (optionA.getText().toString() == geographyQuest[counter - 1].getAnswer()) {
@@ -216,6 +214,8 @@ public class geoQuestionFragment extends Fragment {
             optionD.setTextColor(Color.GREEN);
         }
 
+
+
         if (counter < questionCountMax) {
             buttonConfirmNext.setText("Next");
         }
@@ -235,7 +235,7 @@ public class geoQuestionFragment extends Fragment {
             public void onFinish() {
                 timeLeftInMillis = 0;
                 updateCountDownText();
-                showSolution(questions);
+                checkAnswers(questions);
             }
         }.start();
     }
@@ -245,6 +245,7 @@ public class geoQuestionFragment extends Fragment {
         int seconds = (int) (timeLeftInMillis / 1000) % 60;
         String timeFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
         textViewCountDown.setText(timeFormatted);
+        // indicator turns red when there is less than 10 seconds
         if (timeLeftInMillis < 10000) {
             textViewCountDown.setTextColor(Color.RED);
         } else {

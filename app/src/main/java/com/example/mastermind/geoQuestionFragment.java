@@ -11,6 +11,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.room.Room;
 
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -27,11 +28,14 @@ import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import org.w3c.dom.Text;
+
 import java.nio.BufferUnderflowException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
 public class geoQuestionFragment extends Fragment {
@@ -54,7 +58,12 @@ public class geoQuestionFragment extends Fragment {
     private int score = 0;
     private boolean isAnswered;
     NavController navController;
-
+    private TextView textViewCountDown;
+    // 20 seconds for each question
+    private static final long COUNTDOWN_IN_MILLIS = 20000;
+    private ColorStateList textColorDefaultCd;
+    private CountDownTimer countDownTimer;
+    private long timeLeftInMillis;
 
     public geoQuestionFragment() {
         // Required empty public constructor
@@ -71,23 +80,25 @@ public class geoQuestionFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_questions, container, false);
     }
 
-
-
     public void onViewCreated(View view, Bundle savedInstanceState) {
+
         navController = Navigation.findNavController(view);
         Context context = getContext();
         AppDatabase db = AppDatabase.getAppDatabase(context);
         userDao = db.userDao();
-        rbGroup = (RadioGroup) view.findViewById(R.id.rbGroup);
-        optionA = (RadioButton) view.findViewById(R.id.optionA);
-        optionB = (RadioButton) view.findViewById(R.id.optionB);
-        optionC = (RadioButton) view.findViewById(R.id.optionC);
-        optionD = (RadioButton) view.findViewById(R.id.optionD);
-        question = (TextView) view.findViewById(R.id.questionsTextView);
-        questionCount = (TextView) view.findViewById(R.id.questionCounter);
-        textViewScore = (TextView) view.findViewById(R.id.Score);
-        buttonConfirmNext = (Button) view.findViewById(R.id.confirm);
+        rbGroup =  view.findViewById(R.id.rbGroup);
+        optionA =  view.findViewById(R.id.optionA);
+        optionB =  view.findViewById(R.id.optionB);
+        optionC =  view.findViewById(R.id.optionC);
+        optionD =  view.findViewById(R.id.optionD);
+        question =  view.findViewById(R.id.questionsTextView);
+        textViewCountDown =  view.findViewById(R.id.countDown);
+        questionCount = view.findViewById(R.id.questionCounter);
+        textViewScore =  view.findViewById(R.id.Score);
+        buttonConfirmNext =  view.findViewById(R.id.confirm);
         textColorDefaultRb = optionA.getTextColors();
+        textColorDefaultCd = textViewCountDown.getTextColors();
+
 
         geographyQuest = userDao.loadByCategory("geography");
         Collections.shuffle(Arrays.asList(geographyQuest));
@@ -135,6 +146,10 @@ public class geoQuestionFragment extends Fragment {
             counter++;
             isAnswered = false;
             buttonConfirmNext.setText("Confirm");
+
+            timeLeftInMillis = COUNTDOWN_IN_MILLIS;
+            startCountDown(geographyQuest);
+
         } else {
             Toast.makeText(getActivity(), "End of quiz", Toast.LENGTH_SHORT).show();
             // pass score to showScore fragment
@@ -147,6 +162,8 @@ public class geoQuestionFragment extends Fragment {
 
     public void checkAnswers(Questions[] geographyQuest) {
         isAnswered = true;
+        countDownTimer.cancel();
+
 
         if (optionA.isChecked()) {
             if (optionA.getText().toString() == geographyQuest[counter - 1].getAnswer()) {
@@ -186,7 +203,7 @@ public class geoQuestionFragment extends Fragment {
         optionD.setTextColor(Color.RED);
 
         // highlight the right answer green
-        if (optionA.getText().toString() == questions[counter - 1].getAnswer()) {
+        if (optionA.getText().toString().equals(questions[counter - 1].getAnswer())) {
             optionA.setTextColor(Color.GREEN);
         }
         if (optionB.getText().toString() == questions[counter - 1].getAnswer()) {
@@ -204,6 +221,42 @@ public class geoQuestionFragment extends Fragment {
         }
         else {
             buttonConfirmNext.setText("Finish");
+        }
+    }
+
+    public void startCountDown(Questions[] questions) {
+        countDownTimer = new CountDownTimer(timeLeftInMillis, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                timeLeftInMillis = millisUntilFinished;
+                updateCountDownText();
+            }
+            @Override
+            public void onFinish() {
+                timeLeftInMillis = 0;
+                updateCountDownText();
+                showSolution(questions);
+            }
+        }.start();
+    }
+
+    private void updateCountDownText() {
+        int minutes = (int) (timeLeftInMillis / 1000) / 60;
+        int seconds = (int) (timeLeftInMillis / 1000) % 60;
+        String timeFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
+        textViewCountDown.setText(timeFormatted);
+        if (timeLeftInMillis < 10000) {
+            textViewCountDown.setTextColor(Color.RED);
+        } else {
+            textViewCountDown.setTextColor(textColorDefaultCd);
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (countDownTimer != null) {
+            countDownTimer.cancel();
         }
     }
 }

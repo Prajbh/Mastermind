@@ -48,7 +48,7 @@ public class showScoreFragment extends Fragment {
             public boolean onNavigationItemSelected(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.subjectMenu:
-                        navController.navigate(R.id.action_showScoreFragment_to_subjectFragment2);
+                        navController.navigate(R.id.action_showScoreFragment_to_DifficultyFragment);
                         break;
                         /*
                     case R.id.navigation_received_files_list:

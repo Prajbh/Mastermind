@@ -26,9 +26,8 @@ public class Questions {
     @ColumnInfo(name="wrongAns3")
     private String wrongAns3;
 
-
-
-
+    @ColumnInfo(name="level")
+    private String level;
     public int getUid()
     {
         return uid;
@@ -72,5 +71,9 @@ public class Questions {
 
     public void setWrongAns3(String wrongAns3){this.wrongAns3=wrongAns3;}
     public String getWrongAns3(){return wrongAns3;}
+
+    public void setLevel(String level){this.level=level;}
+    public String getLevel(){return level;}
+
 }
 

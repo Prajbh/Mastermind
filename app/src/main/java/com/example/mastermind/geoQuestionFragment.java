@@ -99,8 +99,12 @@ public class geoQuestionFragment extends Fragment {
         textColorDefaultRb = optionA.getTextColors();
         textColorDefaultCd = textViewCountDown.getTextColors();
 
+        // get subject and difficulty
+        String subject = getArguments().getString("subject");
+        String diff = getArguments().getString("userDiff");
 
-        geographyQuest = userDao.loadByCategory("geography");
+        geographyQuest = userDao.loadSetOfQuestions(subject,diff);
+
         Collections.shuffle(Arrays.asList(geographyQuest));
         showNextQuestion(geographyQuest);
         buttonConfirmNext.setOnClickListener(new View.OnClickListener() {

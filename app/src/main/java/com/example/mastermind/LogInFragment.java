@@ -45,7 +45,7 @@ public class LogInFragment extends Fragment {
         logInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navController.navigate(R.id.action_logInFragment_to_ageFragment);
+                navController.navigate(R.id.action_logInFragment_to_DifficultyFragment);
             }
         });
         regBtn.setOnClickListener(new View.OnClickListener() {

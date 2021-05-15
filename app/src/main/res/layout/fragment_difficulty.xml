@@ -5,15 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/blue4_bg"
-    tools:context=".AgeFragment">
+    tools:context=".DifficultyFragment">
 
 
     <Button
-        android:id="@+id/child"
+        android:id="@+id/easy"
         android:layout_width="281dp"
         android:layout_height="75dp"
         android:drawableLeft="@drawable/children_1"
-        android:text="Grade-schooler"
+        android:text="Easy"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
@@ -22,11 +22,11 @@
         app:layout_constraintVertical_bias="0.533" />
 
     <Button
-        android:id="@+id/teen"
+        android:id="@+id/medium"
         android:layout_width="281dp"
         android:layout_height="75dp"
         android:drawableLeft="@drawable/teen"
-        android:text="Teenager"
+        android:text="Normal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
@@ -35,11 +35,11 @@
         app:layout_constraintVertical_bias="0.707" />
 
     <Button
-        android:id="@+id/adult"
+        android:id="@+id/hard"
         android:layout_width="281dp"
         android:layout_height="75dp"
         android:drawableLeft="@drawable/employees_1"
-        android:text="Adult"
+        android:text="Hard"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
@@ -67,7 +67,7 @@
             <androidx.appcompat.widget.AppCompatCheckedTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Choose your age group"
+                android:text="Choose a difficulty"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

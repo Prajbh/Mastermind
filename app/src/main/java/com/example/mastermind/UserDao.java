@@ -27,6 +27,8 @@ public interface UserDao {
     @Query("Delete FROM Questions")
     public void nukeTable();
 
+    @Query("SELECT * FROM questions WHERE category LIKE:subject AND :level")
+    public Questions[] loadSetOfQuestions(String subject, String level);
 
 
 

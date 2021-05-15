@@ -40,7 +40,7 @@ public class SignUpFragment extends Fragment {
         addUserBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navController.navigate(R.id.action_signUpFragment_to_ageFragment);
+                navController.navigate(R.id.action_logInFragment_to_DifficultyFragment);
             }
         });
     }

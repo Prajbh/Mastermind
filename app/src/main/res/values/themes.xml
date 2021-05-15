@@ -17,7 +17,6 @@
         <item name="colorError"> #B00020</item>
         <item name="colorOnError"> #FFFFFF</item>
         <item name="colorOnBackground">#000000</item>
+        </style>
 
-
-    </style>
 </resources>

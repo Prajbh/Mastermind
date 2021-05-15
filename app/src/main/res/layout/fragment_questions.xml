@@ -37,6 +37,7 @@
     </androidx.cardview.widget.CardView>
 
     <RadioGroup
+        android:id="@+id/rbGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -44,7 +45,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.804">
+        app:layout_constraintVertical_bias="0.683">
 
         <RadioButton
             android:id="@+id/optionA"
@@ -110,12 +111,13 @@
 
     </RadioGroup>
 
-    <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="107dp"
-        android:layout_height="55dp"
+    <Button
+        android:id="@+id/confirm"
+        android:layout_width="174dp"
+        android:layout_height="48dp"
         android:backgroundTint="#f9f9f9"
-        android:src="@drawable/ic_baseline_arrow_forward_24"
+        android:drawableRight="@drawable/ic_baseline_arrow_forward_24"
+        android:text="Confirm"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -134,6 +136,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.976" />
+
+    <TextView
+        android:id="@+id/questionCounter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.83"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.066" />
+
+    <TextView
+        android:id="@+id/Score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Score: "
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.096"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.066" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

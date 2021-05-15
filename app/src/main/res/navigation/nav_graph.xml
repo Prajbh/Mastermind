@@ -43,7 +43,11 @@
         android:id="@+id/geoQuestionFragment"
         android:name="com.example.mastermind.geoQuestionFragment"
         android:label="fragment_questions"
-        tools:layout="@layout/fragment_questions" />
+        tools:layout="@layout/fragment_questions" >
+        <action
+            android:id="@+id/action_geoQuestionFragment_to_showScoreFragment"
+            app:destination="@id/showScoreFragment" />
+    </fragment>
     <fragment
         android:id="@+id/signUpFragment"
         android:name="com.example.mastermind.SignUpFragment"
@@ -64,5 +68,14 @@
         <action
             android:id="@+id/action_logInFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/showScoreFragment"
+        android:name="com.example.mastermind.showScoreFragment"
+        android:label="fragment_show_score"
+        tools:layout="@layout/fragment_show_score" >
+        <action
+            android:id="@+id/action_showScoreFragment_to_subjectFragment2"
+            app:destination="@id/subjectFragment2" />
     </fragment>
 </navigation>

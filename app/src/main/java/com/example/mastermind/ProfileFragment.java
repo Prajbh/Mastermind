@@ -5,7 +5,9 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.annotation.NonNull;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,9 +17,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -67,18 +72,30 @@ public class ProfileFragment extends Fragment {
         });
 
         update.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
-                if (newPass.getText().toString().isEmpty()) {
-                    Toast.makeText(getActivity(), "Enter a password", Toast.LENGTH_SHORT).show();
-                } else {
-                    String newPassword = newPass.getText().toString();
-                    db.collection("users").document(FirebaseAuth.getInstance().getUid())
-                            .update(
-                                    "pass", newPassword
-                            );
-                    Toast.makeText(getActivity(), "Password Updated", Toast.LENGTH_SHORT).show();
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            String newPassword = newPass.getText().toString();
+            if (newPass.getText().toString().isEmpty()) {
+                Toast.makeText(getContext(), "Please enter a password", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                user.updatePassword(newPassword)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    // store new password to firestore
+                                    db.collection("users").document(FirebaseAuth.getInstance().getUid())
+                                            .update(
+                                                    "pass", newPassword
+                                            );
+                                    Toast.makeText(getContext(), "Password Updated", Toast.LENGTH_SHORT).show();
+                                } else
+                                    Toast.makeText(getContext(), "Password NOT updated", Toast.LENGTH_SHORT).show();
+
+                            }
+                        });
                 }
             }
         });

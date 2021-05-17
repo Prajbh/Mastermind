@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "619630226950",
+    "project_id": "trivia-3f393",
+    "storage_bucket": "trivia-3f393.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:619630226950:android:096816f1361f1e4a3c5d87",
+        "android_client_info": {
+          "package_name": "com.example.mastermind"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "619630226950-gks8av6hjdcu3f64kfie0d2c6v1mj7rc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4XRlVSNhh9UWAhfINDA2uUdR0D-p0y_I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "619630226950-gks8av6hjdcu3f64kfie0d2c6v1mj7rc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:619630226950:android:50256ad0af5ee4683c5d87",
+        "android_client_info": {
+          "package_name": "com.example.trivia"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "619630226950-gks8av6hjdcu3f64kfie0d2c6v1mj7rc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4XRlVSNhh9UWAhfINDA2uUdR0D-p0y_I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "619630226950-gks8av6hjdcu3f64kfie0d2c6v1mj7rc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

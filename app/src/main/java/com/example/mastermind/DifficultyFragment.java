@@ -15,8 +15,6 @@ public class DifficultyFragment extends Fragment {
 
     NavController navController;
 
-
-
     public DifficultyFragment() {
         // Required empty public constructor
     }

@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,24 +65,26 @@ public class LogInFragment extends Fragment {
         logInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String user,pass;
+                String user, pass;
                 user = userEmail.getEditText().getText().toString().trim();
                 pass = userPass.getEditText().getText().toString().trim();
-                auth.signInWithEmailAndPassword(user,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(getActivity(), "Login Successful", Toast.LENGTH_SHORT).show();
-                            navController.navigate(R.id.action_logInFragment_to_DifficultyFragment);
-                        }
-                        else {
-                            Toast.makeText(getActivity(), task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-                //navController.navigate(R.id.action_logInFragment_to_DifficultyFragment);
-            }
 
+                if (TextUtils.isEmpty(user) || TextUtils.isEmpty(pass)) {
+                    Toast.makeText(getActivity(), "Please Enter Your Information", Toast.LENGTH_SHORT).show();
+                } else {
+                    auth.signInWithEmailAndPassword(user, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(getActivity(), "Login Successful", Toast.LENGTH_SHORT).show();
+                                navController.navigate(R.id.action_logInFragment_to_homeFragment);
+                            } else {
+                                Toast.makeText(getActivity(), task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                }
+            }
         });
 
 

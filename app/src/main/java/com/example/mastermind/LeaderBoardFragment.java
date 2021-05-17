@@ -107,7 +107,7 @@ public class LeaderBoardFragment extends Fragment {
                         navController.navigate(R.id.action_leaderBoardFragment_to_DifficultyFragment);
                         break;
                     case R.id.homeMenu:
-                        navController.navigate(R.id.action_leaderBoardFragment_to_startFragment2);
+                        navController.navigate(R.id.action_leaderBoardFragment_to_homeFragment);
                         break;
                 }
                 return true;

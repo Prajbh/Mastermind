@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,13 +22,14 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import org.w3c.dom.Text;
+
 
 public class SignUpFragment extends Fragment {
 
     NavController navController;
     FirebaseAuth auth;
     FirebaseFirestore database;
-
 
 
     public SignUpFragment() {
@@ -66,35 +68,40 @@ public class SignUpFragment extends Fragment {
                 email = emailInput.getEditText().getText().toString().trim();
                 pass = password.getEditText().getText().toString().trim();
                 name = nameInput.getEditText().getText().toString().trim();
-                User user = new User(name, email, pass);
-                auth.createUserWithEmailAndPassword(email,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            String uid = task.getResult().getUser().getUid();
-                            database
-                                    .collection("users")
-                                    .document(uid)
-                                    .set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()) {
-                                        Toast.makeText(getActivity(), "User Registered", Toast.LENGTH_SHORT).show();
-                                        navController.navigate(R.id.action_signUpFragment_to_DifficultyFragment);
+
+                if (TextUtils.isEmpty(email) || TextUtils.isEmpty(pass) || TextUtils.isEmpty(name)) {
+                    Toast.makeText(getActivity(), "Please Enter Your Information", Toast.LENGTH_SHORT).show();
+                } else {
+                    User user = new User(name, email, pass);
+                    auth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                String uid = task.getResult().getUser().getUid();
+                                database
+                                        .collection("users")
+                                        .document(uid)
+                                        .set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
+                                            Toast.makeText(getActivity(), "User Registered", Toast.LENGTH_SHORT).show();
+                                            navController.navigate(R.id.action_signUpFragment_to_homeFragment);
+                                        } else {
+                                            Toast.makeText(getActivity(), task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                                        }
                                     }
-                                    else {
-                                        Toast.makeText(getActivity(), task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                            });
+                                });
+                            } else {
+                                Toast.makeText(getActivity(), task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                            }
                         }
-                        else {
-                            Toast.makeText(getActivity(), task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+                    });
+                }
             }
         });
     }
 }
+
+
 

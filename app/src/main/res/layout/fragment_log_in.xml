@@ -61,7 +61,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="250dp"
             android:layout_height="55dp"
-            android:hint="Enter Name" />
+            android:hint="Enter Email Address" />
 
 
     </com.google.android.material.textfield.TextInputLayout>

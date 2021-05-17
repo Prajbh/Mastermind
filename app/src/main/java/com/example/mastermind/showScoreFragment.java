@@ -16,6 +16,9 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationMenu;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FieldValue;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 
 public class showScoreFragment extends Fragment {
@@ -38,11 +41,18 @@ public class showScoreFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         navController = Navigation.findNavController(view);
         score = (TextView) view.findViewById(R.id.showScore);
+        FirebaseFirestore database = FirebaseFirestore.getInstance().getInstance();
+
+
         BottomNavigationView navMenu = (BottomNavigationView) view.findViewById(R.id.bottom_navigation);
         Integer userScore = getArguments().getInt("score");
-        //Toast.makeText(getActivity(),"Score: " + score, Toast.LENGTH_SHORT).show();
-        //score.setText(getArguments().getInt("score"));
+        database.collection("users")
+                .document(FirebaseAuth.getInstance().getUid())
+                .update("score", FieldValue.increment(userScore));
         score.setText("Score: " + userScore.toString());
+
+
+
         navMenu.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
@@ -50,11 +60,9 @@ public class showScoreFragment extends Fragment {
                     case R.id.subjectMenu:
                         navController.navigate(R.id.action_showScoreFragment_to_DifficultyFragment);
                         break;
-                        /*
-                    case R.id.navigation_received_files_list:
-                        navController.navigate(R.id.navigation_received_files_list);
+                    case R.id.leaderboard:
+                        navController.navigate(R.id.action_showScoreFragment_to_leaderBoardFragment);
                         break;
-                         */
                 }
                 return true;
             }

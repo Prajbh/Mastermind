@@ -52,7 +52,11 @@
         android:id="@+id/signUpFragment"
         android:name="com.example.mastermind.SignUpFragment"
         android:label="fragment_sign_up"
-        tools:layout="@layout/fragment_sign_up" />
+        tools:layout="@layout/fragment_sign_up" >
+        <action
+            android:id="@+id/action_signUpFragment_to_DifficultyFragment"
+            app:destination="@id/DifficultyFragment" />
+    </fragment>
     <fragment
         android:id="@+id/logInFragment"
         android:name="com.example.mastermind.LogInFragment"
@@ -72,6 +76,21 @@
         tools:layout="@layout/fragment_show_score" >
         <action
             android:id="@+id/action_showScoreFragment_to_DifficultyFragment"
+            app:destination="@id/DifficultyFragment" />
+        <action
+            android:id="@+id/action_showScoreFragment_to_leaderBoardFragment"
+            app:destination="@id/leaderBoardFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/leaderBoardFragment"
+        android:name="com.example.mastermind.LeaderBoardFragment"
+        android:label="fragment_leader_board"
+        tools:layout="@layout/fragment_leader_board" >
+        <action
+            android:id="@+id/action_leaderBoardFragment_to_startFragment2"
+            app:destination="@id/startFragment2" />
+        <action
+            android:id="@+id/action_leaderBoardFragment_to_DifficultyFragment"
             app:destination="@id/DifficultyFragment" />
     </fragment>
 </navigation>

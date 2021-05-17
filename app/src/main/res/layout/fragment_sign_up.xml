@@ -37,7 +37,7 @@
         app:layout_constraintVertical_bias="0.691" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/userName"
+        android:id="@+id/newEmail"
         android:layout_width="250dp"
         android:layout_height="55dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -46,16 +46,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.402">
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="250dp"
-            android:layout_height="55dp"
-            android:hint="Enter Username" />
 
-
+    <com.google.android.material.textfield.TextInputEditText
+        android:layout_width="250dp"
+        android:layout_height="55dp"
+        android:hint="Enter Email"
+        tools:layout_editor_absoluteX="70dp"
+        tools:layout_editor_absoluteY="170dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/passWord"
+        android:id="@+id/newPass"
         android:layout_width="250dp"
         android:layout_height="55dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -68,8 +69,24 @@
             android:layout_width="250dp"
             android:layout_height="55dp"
             android:hint="Enter Password" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/name"
+        android:layout_width="250dp"
+        android:layout_height="55dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.434"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.273">
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="250dp"
+            android:layout_height="55dp"
+            android:hint="Enter Your Name"
+            tools:layout_editor_absoluteX="70dp"
+            tools:layout_editor_absoluteY="170dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
 

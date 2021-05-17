@@ -11,6 +11,11 @@
         android:enabled="true"
         android:icon="@drawable/ic_baseline_person_add_24"
         android:title="Play Again"/>
+    <item
+        android:id="@+id/homeMenu"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_person_add_24"
+        android:title="Home"/>
 
 
 </menu>

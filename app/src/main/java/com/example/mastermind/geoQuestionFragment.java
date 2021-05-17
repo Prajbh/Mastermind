@@ -168,25 +168,25 @@ public class geoQuestionFragment extends Fragment {
         countDownTimer.cancel();
 
         if (optionA.isChecked()) {
-            if (optionA.getText().toString() == geographyQuest[counter - 1].getAnswer()) {
+            if (optionA.getText().toString().equals(geographyQuest[counter - 1].getAnswer())) {
                 score++;
                 Toast.makeText(getActivity(), "button A chosen was Correct", Toast.LENGTH_SHORT).show();
             }
         }
         if (optionB.isChecked()) {
-            if (optionB.getText().toString() == geographyQuest[counter - 1].getAnswer()) {
+            if (optionB.getText().toString().equals(geographyQuest[counter - 1].getAnswer())) {
                 score++;
                 Toast.makeText(getActivity(), "button B chosen was Correct", Toast.LENGTH_SHORT).show();
             }
         }
         if (optionC.isChecked()) {
-            if (optionC.getText().toString() == geographyQuest[counter - 1].getAnswer()) {
+            if (optionC.getText().toString().equals(geographyQuest[counter - 1].getAnswer())) {
                 score++;
                 Toast.makeText(getActivity(), "button C chosen was Correct", Toast.LENGTH_SHORT).show();
             }
         }
         if (optionD.isChecked()) {
-            if (optionD.getText().toString() == geographyQuest[counter - 1].getAnswer()) {
+            if (optionD.getText().toString().equals(geographyQuest[counter - 1].getAnswer())) {
                 score++;
                 Toast.makeText(getActivity(), "button D chosen was Correct", Toast.LENGTH_SHORT).show();
             }
@@ -208,13 +208,13 @@ public class geoQuestionFragment extends Fragment {
         if (optionA.getText().toString().equals(questions[counter - 1].getAnswer())) {
             optionA.setTextColor(Color.GREEN);
         }
-        if (optionB.getText().toString() == questions[counter - 1].getAnswer()) {
+        if (optionB.getText().toString().equals(questions[counter - 1].getAnswer())) {
             optionB.setTextColor(Color.GREEN);
         }
-        if (optionC.getText().toString() == questions[counter - 1].getAnswer()) {
+        if (optionC.getText().toString().equals(questions[counter - 1].getAnswer())) {
             optionC.setTextColor(Color.GREEN);
         }
-        if (optionD.getText().toString() == questions[counter - 1].getAnswer()) {
+        if (optionD.getText().toString().equals(questions[counter - 1].getAnswer())) {
             optionD.setTextColor(Color.GREEN);
         }
 

@@ -130,6 +130,7 @@ public class LogInFragment extends Fragment implements View.OnClickListener {
         googleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 signToGoogle();
 
             }
@@ -146,7 +147,7 @@ public class LogInFragment extends Fragment implements View.OnClickListener {
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken("969262305380-b4gok644spmqui0bv8v5e8npa52tat5k.apps.googleusercontent.com")
                 .requestEmail().build();
-        client = GoogleSignIn.getClient(this, gso);
+        client = GoogleSignIn.getClient(getContext(), gso);
 
     }*/
 

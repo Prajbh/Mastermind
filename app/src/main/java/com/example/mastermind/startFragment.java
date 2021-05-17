@@ -47,7 +47,7 @@ public class startFragment extends Fragment {
         startBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navController.navigate(R.id.action_subjectFragment2_to_geoQuestionFragment);
+                navController.navigate(R.id.action_startFragment2_to_logInFragment);
 
             }
         });

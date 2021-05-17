@@ -1,7 +1,7 @@
 package com.example.mastermind;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,21 +10,29 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.SavedStateHandle;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.GoogleAuthProvider;
 
-public class LogInFragment extends Fragment implements View.OnClickListener{
+import java.util.concurrent.Executor;
+
+public class LogInFragment extends Fragment implements View.OnClickListener {
 
     NavController navController;
     private View rootview;
@@ -41,7 +49,7 @@ public class LogInFragment extends Fragment implements View.OnClickListener{
     private FirebaseAuth mauth;
     //private UserViewModel userViewModel;
     private SavedStateHandle savedStateHandle;
-    private TextInputLayout x,y;
+    private TextInputLayout x, y;
 
     public LogInFragment() {
 
@@ -52,7 +60,7 @@ public class LogInFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mauth=FirebaseAuth.getInstance();
+        mauth = FirebaseAuth.getInstance();
 
     }
 
@@ -77,44 +85,128 @@ public class LogInFragment extends Fragment implements View.OnClickListener{
         navController = Navigation.findNavController(view);
         Button logInBtn = view.findViewById(R.id.logInBtn);
         Button regBtn = view.findViewById(R.id.regBtn);
-        x=getView().findViewById(R.id.userName);
-        y=getView().findViewById(R.id.passWord);
-        logInBtn.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View view) {
-                                            String s1, s2;
-                                            s1 = x.getEditText().getText().toString().trim();
-                                            s2 = y.getEditText().getText().toString().trim();
-                                            mauth.signInWithEmailAndPassword(s1, s2).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                                                @Override
-                                                public void onComplete(@NonNull Task<AuthResult> task) {
-                                                    if (task.isSuccessful()) {
-                                                        Toast.makeText(getActivity(), "User login was successful", Toast.LENGTH_LONG).show();
+        SignInButton googleButton = view.findViewById(R.id.button);
+        x = getView().findViewById(R.id.userName);
+        y = getView().findViewById(R.id.passWord);
 
-                                                    } else {
-                                                        Toast.makeText(getActivity(), "User login was unsuccessful", Toast.LENGTH_LONG).show();
-                                                    }
-                                                }
-                                            });
-                                        }
-                                    });
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken("969262305380-b4gok644spmqui0bv8v5e8npa52tat5k.apps.googleusercontent.com")
+                .requestEmail().build();
+
+        client = GoogleSignIn.getClient(getContext(), gso);
+        mAuth = FirebaseAuth.getInstance();
+
+
+        logInBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String s1, s2;
+                s1 = x.getEditText().getText().toString().trim();
+                s2 = y.getEditText().getText().toString().trim();
+                mauth.signInWithEmailAndPassword(s1, s2).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(getActivity(), "User login was successful", Toast.LENGTH_LONG).show();
+
+                        } else {
+                            Toast.makeText(getActivity(), "User login was unsuccessful", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+                navController.navigate(R.id.action_logInFragment_to_ageFragment);
+            }
+        });
+
         regBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 navController.navigate(R.id.action_logInFragment_to_signUpFragment);
             }
         });
+
+
+        googleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signToGoogle();
+
+            }
+
+
+        });
+
+
     }
 
-    private void login(String get_username, String get_password) {
-        /*userViewModel.login(username, password).observe(viewLifecycleOwner, (Observer<LoginResult>) result -> {
-            if (result.success) {
-                savedStateHandle.set(LOGIN_SUCCESSFUL, true);
-                NavHostFragment.findNavController(this).popBackStack();
-            } else {
-                showErrorMessage();
-            }*/
+
+    //start of google sign in
+    /*private void configureSignIn() {
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken("969262305380-b4gok644spmqui0bv8v5e8npa52tat5k.apps.googleusercontent.com")
+                .requestEmail().build();
+        client = GoogleSignIn.getClient(this, gso);
+
+    }*/
+
+    private void signToGoogle() {
+        Intent signinIntent = client.getSignInIntent();
+        startActivityForResult(signinIntent, SIGNIN);
+        //configureSignIn();
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == SIGNIN) {
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            //handledSignIn(task);
+            GoogleSignInAccount account = null;
+            try {
+                account = task.getResult(ApiException.class);
+                firebaseauthwithGoogle(account.getIdToken());
+            } catch (ApiException e) {
+                e.printStackTrace();
+            }
+
+
+        }
+    }
+
+    private void firebaseauthwithGoogle(String idToken) {
+        AuthCredential credencial = GoogleAuthProvider.getCredential(idToken, null);
+        mAuth.signInWithCredential(credencial)
+                .addOnCompleteListener((Executor) this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+
+                            //task is successfull
+                            //Log.d(TAG, "signInWithCredential:success");
+                            //FirebaseUser user = mAuth.getCurrentUser();
+
+                        } else {
+                            //task not successfull
+                            //Log.w(TAG, "signInWithCredential:failure", task.getException());
+                        }
+                    }
+                });
+    }
+
+    private void handledSignIn(Task<GoogleSignInAccount> task) {
+
+        try {
+            GoogleSignInAccount account = task.getResult();
+            firebaseauthwithGoogle(account.getIdToken());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    //end of google sign-in
+
 
     @Override
     public void onClick(View view) {

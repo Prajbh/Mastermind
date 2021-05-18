@@ -1,16 +1,14 @@
 package com.example.mastermind;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 
 public class subjectFragment extends Fragment {
@@ -46,6 +44,7 @@ public class subjectFragment extends Fragment {
         Button sportsBtn = view.findViewById(R.id.sports);
         Button moviesBtn = view.findViewById(R.id.movies);
         Button histBtn = view.findViewById(R.id.history);
+        Button imageQuiz = view.findViewById(R.id.image_quiz);
         String diff = getArguments().getString("difficulty");
         geoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,6 +83,15 @@ public class subjectFragment extends Fragment {
                 bundle.putString("userDiff", diff);
                 bundle.putString("subject", "movies");
                 navController.navigate(R.id.action_subjectFragment2_to_geoQuestionFragment, bundle);            }
+        });
+        imageQuiz.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // get and pass difficulty
+                //Bundle bundle = new Bundle();
+                //bundle.putString("userDiff", diff);
+                //bundle.putString("subject", "movies");
+                navController.navigate(R.id.action_subjectFragment2_to_image_ques);            }
         });
     }
 }

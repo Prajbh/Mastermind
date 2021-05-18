@@ -1,42 +1,43 @@
 package com.example.mastermind;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
-
-import androidx.appcompat.widget.AppCompatCheckedTextView;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.room.Room;
-
 import android.os.CountDownTimer;
-import android.os.Handler;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.ForegroundColorSpan;
-import android.util.Log;
+import android.speech.RecognitionListener;
+import android.speech.RecognizerIntent;
+import android.speech.SpeechRecognizer;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.snackbar.Snackbar;
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
-import org.w3c.dom.Text;
-
-import java.nio.BufferUnderflowException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
-import java.util.Random;
+
+//import androidx.appcompat.app.AppCompatActivity;
 
 public class geoQuestionFragment extends Fragment {
 
@@ -59,6 +60,12 @@ public class geoQuestionFragment extends Fragment {
     private boolean isAnswered;
     NavController navController;
     private TextView textViewCountDown;
+
+    //speech part
+    private ImageView micButton;
+    public static final Integer RecordAudioRequestFlag = 1;
+    private SpeechRecognizer speechRecognizer;
+
     // 20 seconds for each question
     private static final long COUNTDOWN_IN_MILLIS = 20000;
     private ColorStateList textColorDefaultCd;
@@ -80,22 +87,23 @@ public class geoQuestionFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_questions, container, false);
     }
 
+
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
         navController = Navigation.findNavController(view);
         Context context = getContext();
         AppDatabase db = AppDatabase.getAppDatabase(context);
         userDao = db.userDao();
-        rbGroup =  view.findViewById(R.id.rbGroup);
-        optionA =  view.findViewById(R.id.optionA);
-        optionB =  view.findViewById(R.id.optionB);
-        optionC =  view.findViewById(R.id.optionC);
-        optionD =  view.findViewById(R.id.optionD);
-        question =  view.findViewById(R.id.questionsTextView);
-        textViewCountDown =  view.findViewById(R.id.countDown);
+        rbGroup = view.findViewById(R.id.rbGroup);
+        optionA = view.findViewById(R.id.optionA);
+        optionB = view.findViewById(R.id.optionB);
+        optionC = view.findViewById(R.id.optionC);
+        optionD = view.findViewById(R.id.optionD);
+        question = view.findViewById(R.id.questionsTextView);
+        textViewCountDown = view.findViewById(R.id.countDown);
         questionCount = view.findViewById(R.id.questionCounter);
-        textViewScore =  view.findViewById(R.id.Score);
-        buttonConfirmNext =  view.findViewById(R.id.confirm);
+        textViewScore = view.findViewById(R.id.Score);
+        buttonConfirmNext = view.findViewById(R.id.confirm);
         textColorDefaultRb = optionA.getTextColors();
         textColorDefaultCd = textViewCountDown.getTextColors();
 
@@ -103,7 +111,7 @@ public class geoQuestionFragment extends Fragment {
         String subject = getArguments().getString("subject");
         String diff = getArguments().getString("userDiff");
 
-        geographyQuest = userDao.loadSetOfQuestions(subject,diff);
+        geographyQuest = userDao.loadSetOfQuestions(subject, diff);
 
         Collections.shuffle(Arrays.asList(geographyQuest));
         showNextQuestion(geographyQuest);
@@ -121,6 +129,83 @@ public class geoQuestionFragment extends Fragment {
                 }
             }
         });
+
+        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+            checkPermission();
+        }
+        //editText = findViewById(R.id.editTextTextPersonName);
+        micButton = getView().findViewById(R.id.imageButton2);
+        speechRecognizer = SpeechRecognizer.createSpeechRecognizer(getContext());
+        final Intent speechRecognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+
+        //speech override functions
+
+        speechRecognizer.setRecognitionListener(new RecognitionListener() {
+            @Override
+            public void onReadyForSpeech(Bundle params) {
+            }
+
+            @Override
+            public void onBeginningOfSpeech() {
+                //editText.setText("Mic");
+                //editText.setHint("Listening..");
+            }
+
+            @Override
+            public void onRmsChanged(float rmsdB) {
+            }
+
+            @Override
+            public void onBufferReceived(byte[] buffer) {
+            }
+
+            @Override
+            public void onEndOfSpeech() {
+            }
+
+            @Override
+            public void onError(int error) {
+            }
+
+            @Override
+            public void onResults(Bundle results) {
+                micButton.setImageResource(R.drawable.ic_baseline_mic_24);
+                ArrayList<String> data = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+                //editText.setText(data.get(0));
+            }
+
+            @Override
+            public void onPartialResults(Bundle partialResults) {
+            }
+
+            @Override
+            public void onEvent(int eventType, Bundle params) {
+            }
+        });
+        micButton.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    speechRecognizer.stopListening();
+                }
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    //micButton.setImageResource(R.drawable.avatars);
+                    speechRecognizer.startListening(speechRecognizerIntent);
+                }
+                return false;
+            }
+        });
+
+        /*
+        @override
+        protected void onDestroy() {
+            super.onDestroy();
+            speechRecognizer.destroy();
+        }*/
+
+
     }
 
     public void showNextQuestion(Questions[] geographyQuest) {
@@ -157,8 +242,8 @@ public class geoQuestionFragment extends Fragment {
             Toast.makeText(getActivity(), "End of quiz", Toast.LENGTH_SHORT).show();
             // pass score to showScore fragment
             Bundle bundle = new Bundle();
-            bundle.putInt("score",score);
-            navController.navigate(R.id.action_geoQuestionFragment_to_showScoreFragment, bundle );
+            bundle.putInt("score", score);
+            navController.navigate(R.id.action_geoQuestionFragment_to_showScoreFragment, bundle);
             //Toast.makeText(getActivity(), "End of quiz", Toast.LENGTH_SHORT).show();
         }
     }
@@ -197,7 +282,6 @@ public class geoQuestionFragment extends Fragment {
     }
 
 
-
     private void showSolution(Questions[] questions) {
         optionA.setTextColor(Color.RED);
         optionB.setTextColor(Color.RED);
@@ -219,11 +303,9 @@ public class geoQuestionFragment extends Fragment {
         }
 
 
-
         if (counter < questionCountMax) {
             buttonConfirmNext.setText("Next");
-        }
-        else {
+        } else {
             buttonConfirmNext.setText("Finish");
         }
     }
@@ -235,6 +317,7 @@ public class geoQuestionFragment extends Fragment {
                 timeLeftInMillis = millisUntilFinished;
                 updateCountDownText();
             }
+
             @Override
             public void onFinish() {
                 timeLeftInMillis = 0;
@@ -257,6 +340,25 @@ public class geoQuestionFragment extends Fragment {
         }
     }
 
+    private void checkPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            ActivityCompat.requestPermissions((Activity) getContext(), new String[]{Manifest.permission.RECORD_AUDIO}, RecordAudioRequestFlag);
+        }
+    }
+    @Override
+    public void onRequestPermissionsResult ( int requestCode, @NonNull String[] permissions,
+                                             @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == RecordAudioRequestFlag && grantResults.length > 0) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                //Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show();
+            }
+            //end of speech code
+        }
+    }
+
+
+
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -264,7 +366,14 @@ public class geoQuestionFragment extends Fragment {
             countDownTimer.cancel();
         }
     }
+
 }
+
+
+
+
+
+
 
 
 

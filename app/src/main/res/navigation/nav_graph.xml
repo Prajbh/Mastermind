@@ -25,6 +25,9 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_subjectFragment2_to_image_ques"
+            app:destination="@id/image_ques" />
     </fragment>
     <fragment
         android:id="@+id/DifficultyFragment"
@@ -123,4 +126,8 @@
             android:id="@+id/action_profileFragment_to_DifficultyFragment"
             app:destination="@id/DifficultyFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/image_ques"
+        android:name="com.example.mastermind.Image_ques"
+        android:label="Image_ques" />
 </navigation>

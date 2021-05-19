@@ -1,18 +1,16 @@
 package com.example.mastermind;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -56,6 +54,7 @@ public class subjectFragment extends Fragment {
         Button sportsBtn = view.findViewById(R.id.sports);
         Button moviesBtn = view.findViewById(R.id.movies);
         Button histBtn = view.findViewById(R.id.history);
+        Button miscBtn = view.findViewById(R.id.miscellaneous);
         //String diff = getArguments().getString("difficulty");
         db = FirebaseFirestore.getInstance();
         name = (TextView) view.findViewById(R.id.currentUsersName1);
@@ -106,6 +105,13 @@ public class subjectFragment extends Fragment {
                 Bundle bundle = new Bundle();
                 bundle.putString("subject", "movies");
                 navController.navigate(R.id.action_subjectFragment2_to_DifficultyFragment, bundle);            }
+        });
+
+        miscBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navController.navigate(R.id.action_subjectFragment2_to_image_ques);
+            }
         });
 
 

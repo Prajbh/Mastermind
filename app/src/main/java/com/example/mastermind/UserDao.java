@@ -5,11 +5,6 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
-
-import com.example.mastermind.Questions;
-
-import java.util.List;
-import java.util.ArrayList;
 @Dao
 public interface UserDao {
     @Query("select * from QUESTIONS LIMIT 1")
@@ -29,9 +24,6 @@ public interface UserDao {
 
     @Query("SELECT * FROM questions WHERE category LIKE:subject AND :level")
     public Questions[] loadSetOfQuestions(String subject, String level);
-
-
-
 
 
 

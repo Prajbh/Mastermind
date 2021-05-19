@@ -129,5 +129,9 @@
     <fragment
         android:id="@+id/image_ques"
         android:name="com.example.mastermind.Image_ques"
-        android:label="Image_ques" />
+        android:label="Image_ques" >
+        <action
+            android:id="@+id/action_image_ques_to_showScoreFragment"
+            app:destination="@id/showScoreFragment" />
+    </fragment>
 </navigation>

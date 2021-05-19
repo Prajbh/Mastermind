@@ -42,14 +42,12 @@ public class showScoreFragment extends Fragment {
         navController = Navigation.findNavController(view);
         score = (TextView) view.findViewById(R.id.showScore);
         FirebaseFirestore database = FirebaseFirestore.getInstance().getInstance();
-
-
         BottomNavigationView navMenu = (BottomNavigationView) view.findViewById(R.id.bottom_navigation);
         Integer userScore = getArguments().getInt("score");
         database.collection("users")
                 .document(FirebaseAuth.getInstance().getUid())
                 .update("score", FieldValue.increment(userScore));
-        score.setText("Score: " + userScore.toString());
+        score.setText(userScore.toString() + "/10");
 
 
 
@@ -57,15 +55,20 @@ public class showScoreFragment extends Fragment {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
                 switch (item.getItemId()) {
-                    case R.id.subjectMenu:
-                        navController.navigate(R.id.action_showScoreFragment_to_DifficultyFragment);
-                        break;
                     case R.id.leaderboard:
                         navController.navigate(R.id.action_showScoreFragment_to_leaderBoardFragment);
                         break;
+                    case R.id.playScreen:
+                    case R.id.homeMenu:
+                        navController.navigate(R.id.action_showScoreFragment_to_subjectFragment2);
+                        break;
+                    case R.id.profileScreen:
+                        navController.navigate(R.id.action_showScoreFragment_to_profileFragment);
+
                 }
                 return true;
             }
         });
+
     }
 }

@@ -4,8 +4,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/blue_diagonal2"
+    android:background="#BDCDD5"
     tools:context=".SignUpFragment">
+
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="195dp"
+        android:layout_height="130dp"
+        android:elevation="10dp"
+        android:src="@drawable/signup"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.891" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="333dp"
+        android:layout_height="503dp"
+        android:layout_marginBottom="28dp"
+        android:background="@drawable/white_bg"
+        android:clickable="false"
+        android:elevation="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView2"
@@ -20,23 +45,26 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.052" />
+        app:layout_constraintVertical_bias="0.023" />
 
     <Button
+        android:elevation="10dp"
         android:id="@+id/newUserBtn"
-        android:layout_width="166dp"
-        android:layout_height="48dp"
+        android:layout_width="250dp"
+        android:layout_height="55dp"
+        android:backgroundTint="#C6ADFF"
         android:drawable="@drawable/round_text"
         android:drawableLeft="@drawable/ic_baseline_person_add_24"
         android:text="Register"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.434"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.691" />
+        app:layout_constraintVertical_bias="0.656" />
 
     <com.google.android.material.textfield.TextInputLayout
+        android:elevation="10dp"
         android:id="@+id/newEmail"
         android:layout_width="250dp"
         android:layout_height="55dp"
@@ -45,33 +73,40 @@
         app:layout_constraintHorizontal_bias="0.434"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.402">
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:layout_width="250dp"
-        android:layout_height="55dp"
-        android:hint="Enter Email"
-        tools:layout_editor_absoluteX="70dp"
-        tools:layout_editor_absoluteY="170dp" />
+        app:layout_constraintVertical_bias="0.392">
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="250dp"
+            android:layout_height="55dp"
+            android:hint="Enter Email"
+            tools:layout_editor_absoluteX="70dp"
+            tools:layout_editor_absoluteY="170dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:elevation="10dp"
         android:id="@+id/newPass"
         android:layout_width="250dp"
         android:layout_height="55dp"
+        app:endIconMode="password_toggle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.434"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.559">
+        app:layout_constraintVertical_bias="0.525" >
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="250dp"
             android:layout_height="55dp"
-            android:hint="Enter Password" />
+            android:hint="Enter a password"
+            tools:layout_editor_absoluteX="70dp"
+            tools:layout_editor_absoluteY="170dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
+
+
+
     <com.google.android.material.textfield.TextInputLayout
+        android:elevation="10dp"
         android:id="@+id/name"
         android:layout_width="250dp"
         android:layout_height="55dp"
@@ -80,14 +115,16 @@
         app:layout_constraintHorizontal_bias="0.434"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.273">
+        app:layout_constraintVertical_bias="0.255" >
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="250dp"
             android:layout_height="55dp"
             android:hint="Enter Your Name"
             tools:layout_editor_absoluteX="70dp"
             tools:layout_editor_absoluteY="170dp" />
+
     </com.google.android.material.textfield.TextInputLayout>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

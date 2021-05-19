@@ -51,6 +51,7 @@ public class SignUpFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
+
         navController = Navigation.findNavController(view);
         Button addUserBtn = view.findViewById(R.id.newUserBtn);
 
@@ -86,7 +87,7 @@ public class SignUpFragment extends Fragment {
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if (task.isSuccessful()) {
                                             Toast.makeText(getActivity(), "User Registered", Toast.LENGTH_SHORT).show();
-                                            navController.navigate(R.id.action_signUpFragment_to_homeFragment);
+                                            navController.navigate(R.id.action_signUpFragment_to_subjectFragment2);
                                         } else {
                                             Toast.makeText(getActivity(), task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                                         }
@@ -101,6 +102,7 @@ public class SignUpFragment extends Fragment {
             }
         });
     }
+
 }
 
 

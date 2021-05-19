@@ -10,7 +10,7 @@
 
     </corners>
 
-            <corners android:radius="20dp" />
+    <corners android:radius="20dp" />
     <item
         android:bottom="0dp"
         android:left="0dp"

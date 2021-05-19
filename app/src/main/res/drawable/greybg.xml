@@ -4,13 +4,13 @@
     android:shape="rectangle"
     android:padding="10dp">
 
-    <solid android:color="@color/white" />
+    <solid android:color="#f7f9fc" />
     <corners
         android:radius="20dp">
 
     </corners>
 
-            <corners android:radius="20dp" />
+    <corners android:radius="20dp" />
     <item
         android:bottom="0dp"
         android:left="0dp"

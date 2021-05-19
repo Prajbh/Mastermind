@@ -100,24 +100,24 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        BottomNavigationView navMenu = (BottomNavigationView) view.findViewById(R.id.bottom_navigation1);
+        BottomNavigationView navMenu = (BottomNavigationView) view.findViewById(R.id.bottom_navigation3);
         navController = Navigation.findNavController(view);
+
         navMenu.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
                 switch (item.getItemId()) {
-                    case R.id.subjectMenu:
-                        navController.navigate(R.id.action_profileFragment_to_DifficultyFragment);
-                        break;
+                    case R.id.playScreen:
                     case R.id.homeMenu:
-                        navController.navigate(R.id.action_profileFragment_to_homeFragment);
+                        navController.navigate(R.id.action_profileFragment_to_subjectFragment2);
                         break;
                     case R.id.leaderboard:
                         navController.navigate(R.id.action_profileFragment_to_leaderBoardFragment);
-                        break;
+
                 }
                 return true;
             }
+
         });
 
     }

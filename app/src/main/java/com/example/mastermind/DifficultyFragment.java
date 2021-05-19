@@ -39,6 +39,8 @@ public class DifficultyFragment extends Fragment {
         Button easyBtn = view.findViewById(R.id.easy);
         Button mediumBtn = view.findViewById(R.id.medium);
         Button hardBtn = view.findViewById(R.id.hard);
+        String sub = getArguments().getString("subject");
+
 
 
         // pass difficulty that the user chooses
@@ -47,7 +49,8 @@ public class DifficultyFragment extends Fragment {
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
                 bundle.putString("difficulty", "1");
-                navController.navigate(R.id.action_ageFragment_to_subjectFragment2, bundle);
+                bundle.putString("subject", sub);
+                navController.navigate(R.id.action_DifficultyFragment_to_geoQuestionFragment, bundle);
             }
         });
         mediumBtn.setOnClickListener(new View.OnClickListener() {
@@ -55,7 +58,8 @@ public class DifficultyFragment extends Fragment {
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
                 bundle.putString("difficulty", "2");
-                navController.navigate(R.id.action_ageFragment_to_subjectFragment2, bundle);
+                bundle.putString("subject", sub);
+                navController.navigate(R.id.action_DifficultyFragment_to_geoQuestionFragment, bundle);
             }
         });
         hardBtn.setOnClickListener(new View.OnClickListener() {
@@ -63,7 +67,8 @@ public class DifficultyFragment extends Fragment {
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
                 bundle.putString("difficulty", "3");
-                navController.navigate(R.id.action_ageFragment_to_subjectFragment2, bundle);
+                bundle.putString("subject", sub);
+                navController.navigate(R.id.action_DifficultyFragment_to_geoQuestionFragment, bundle);
             }
         });
 

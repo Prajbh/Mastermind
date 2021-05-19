@@ -101,7 +101,7 @@ public class geoQuestionFragment extends Fragment {
 
         // get subject and difficulty
         String subject = getArguments().getString("subject");
-        String diff = getArguments().getString("userDiff");
+        String diff = getArguments().getString("difficulty");
 
         geographyQuest = userDao.loadSetOfQuestions(subject,diff);
 
@@ -170,25 +170,21 @@ public class geoQuestionFragment extends Fragment {
         if (optionA.isChecked()) {
             if (optionA.getText().toString().equals(geographyQuest[counter - 1].getAnswer())) {
                 score++;
-                Toast.makeText(getActivity(), "button A chosen was Correct", Toast.LENGTH_SHORT).show();
             }
         }
         if (optionB.isChecked()) {
             if (optionB.getText().toString().equals(geographyQuest[counter - 1].getAnswer())) {
                 score++;
-                Toast.makeText(getActivity(), "button B chosen was Correct", Toast.LENGTH_SHORT).show();
             }
         }
         if (optionC.isChecked()) {
             if (optionC.getText().toString().equals(geographyQuest[counter - 1].getAnswer())) {
                 score++;
-                Toast.makeText(getActivity(), "button C chosen was Correct", Toast.LENGTH_SHORT).show();
             }
         }
         if (optionD.isChecked()) {
             if (optionD.getText().toString().equals(geographyQuest[counter - 1].getAnswer())) {
                 score++;
-                Toast.makeText(getActivity(), "button D chosen was Correct", Toast.LENGTH_SHORT).show();
             }
         }
         textViewScore.setText("Score: " + score + "/" + questionCountMax);

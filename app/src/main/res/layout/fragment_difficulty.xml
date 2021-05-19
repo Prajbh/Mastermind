@@ -4,82 +4,86 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/blue4_bg"
+    android:background="#BDCDD5"
     tools:context=".DifficultyFragment">
 
 
-    <Button
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="332dp"
+        android:layout_height="607dp"
+        android:background="@drawable/roundbg"
+        android:backgroundTint="#f7f9fc"
+        android:elevation="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.484" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="20dp"
+        android:fontFamily="sans-serif-black"
+        android:text="Choose a difficulty"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.185" />
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/easy"
         android:layout_width="281dp"
         android:layout_height="75dp"
-        android:drawableLeft="@drawable/children_1"
+        android:backgroundTint="#c6adff"
+        android:drawableLeft="@drawable/easy"
+        app:cornerRadius="20dp"
+        app:elevation="20dp"
         android:text="Easy"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.533" />
+        app:layout_constraintVertical_bias="0.336" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/medium"
         android:layout_width="281dp"
         android:layout_height="75dp"
-        android:drawableLeft="@drawable/teen"
+        android:backgroundTint="#c6adff"
+        android:drawableLeft="@drawable/medium"
+        android:elevation="10dp"
         android:text="Normal"
+        app:cornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.707" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/hard"
         android:layout_width="281dp"
         android:layout_height="75dp"
-        android:drawableLeft="@drawable/employees_1"
-        android:text="Hard"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.897" />
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
-        android:layout_width="307dp"
-        android:layout_height="116dp"
+        android:backgroundTint="#c6adff"
+        android:drawableLeft="@drawable/hard"
         android:elevation="10dp"
-        app:cardCornerRadius="20dp"
+        android:text="Hard"
+        app:cornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.247">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="300dp"
-            android:layout_height="122dp">
-
-
-            <androidx.appcompat.widget.AppCompatCheckedTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Choose a difficulty"
-                android:textSize="24sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-            </androidx.appcompat.widget.AppCompatCheckedTextView>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    </androidx.cardview.widget.CardView>
+        app:layout_constraintVertical_bias="0.667" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

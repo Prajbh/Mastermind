@@ -11,7 +11,9 @@
         tools:layout="@layout/fragment_start" >
         <action
             android:id="@+id/action_startFragment2_to_logInFragment"
-            app:destination="@id/logInFragment" />
+            app:destination="@id/logInFragment"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/nav_default_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/subjectFragment2"
@@ -19,8 +21,25 @@
         android:label="fragment_subject"
         tools:layout="@layout/fragment_subject" >
         <action
-            android:id="@+id/action_subjectFragment2_to_geoQuestionFragment"
-            app:destination="@id/geoQuestionFragment"
+            android:id="@+id/action_subjectFragment2_to_DifficultyFragment"
+            app:destination="@id/DifficultyFragment" />
+        <action
+            android:id="@+id/action_subjectFragment2_to_profileFragment"
+            app:destination="@id/profileFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_subjectFragment2_to_DifficultyFragment2"
+            app:destination="@id/DifficultyFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_subjectFragment2_to_leaderBoardFragment"
+            app:destination="@id/leaderBoardFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
@@ -32,12 +51,8 @@
         android:label="fragment_difficulty"
         tools:layout="@layout/fragment_difficulty">
         <action
-            android:id="@+id/action_ageFragment_to_subjectFragment2"
-            app:destination="@id/subjectFragment2"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            android:id="@+id/action_DifficultyFragment_to_geoQuestionFragment"
+            app:destination="@id/geoQuestionFragment" />
     </fragment>
     <fragment
         android:id="@+id/geoQuestionFragment"
@@ -46,7 +61,11 @@
         tools:layout="@layout/fragment_questions" >
         <action
             android:id="@+id/action_geoQuestionFragment_to_showScoreFragment"
-            app:destination="@id/showScoreFragment" />
+            app:destination="@id/showScoreFragment"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
@@ -54,8 +73,12 @@
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" >
         <action
-            android:id="@+id/action_signUpFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            android:id="@+id/action_signUpFragment_to_subjectFragment2"
+            app:destination="@id/subjectFragment2"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/logInFragment"
@@ -64,10 +87,16 @@
         tools:layout="@layout/fragment_log_in" >
         <action
             android:id="@+id/action_logInFragment_to_signUpFragment"
-            app:destination="@id/signUpFragment" />
+            app:destination="@id/signUpFragment"
+            app:enterAnim="@anim/fragment_close_enter"
+            app:exitAnim="@anim/fragment_close_exit" />
         <action
-            android:id="@+id/action_logInFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            android:id="@+id/action_logInFragment_to_subjectFragment2"
+            app:destination="@id/subjectFragment2"
+            app:enterAnim="@anim/nav_default_pop_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/showScoreFragment"
@@ -75,11 +104,26 @@
         android:label="fragment_show_score"
         tools:layout="@layout/fragment_show_score" >
         <action
-            android:id="@+id/action_showScoreFragment_to_DifficultyFragment"
-            app:destination="@id/DifficultyFragment" />
-        <action
             android:id="@+id/action_showScoreFragment_to_leaderBoardFragment"
-            app:destination="@id/leaderBoardFragment" />
+            app:destination="@id/leaderBoardFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_showScoreFragment_to_profileFragment"
+            app:destination="@id/profileFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_showScoreFragment_to_subjectFragment2"
+            app:destination="@id/subjectFragment2"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/leaderBoardFragment"
@@ -87,26 +131,19 @@
         android:label="fragment_leader_board"
         tools:layout="@layout/fragment_leader_board" >
         <action
-            android:id="@+id/action_leaderBoardFragment_to_DifficultyFragment"
-            app:destination="@id/DifficultyFragment" />
+            android:id="@+id/action_leaderBoardFragment_to_subjectFragment2"
+            app:destination="@id/subjectFragment2"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
-            android:id="@+id/action_leaderBoardFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.example.mastermind.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
-        <action
-            android:id="@+id/action_homeFragment_to_DifficultyFragment"
-            app:destination="@id/DifficultyFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_leaderBoardFragment"
-            app:destination="@id/leaderBoardFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
+            android:id="@+id/action_leaderBoardFragment_to_profileFragment"
+            app:destination="@id/profileFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/fragment_open_exit" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -114,13 +151,10 @@
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" >
         <action
-            android:id="@+id/action_profileFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            android:id="@+id/action_profileFragment_to_subjectFragment2"
+            app:destination="@id/subjectFragment2" />
         <action
             android:id="@+id/action_profileFragment_to_leaderBoardFragment"
             app:destination="@id/leaderBoardFragment" />
-        <action
-            android:id="@+id/action_profileFragment_to_DifficultyFragment"
-            app:destination="@id/DifficultyFragment" />
     </fragment>
 </navigation>

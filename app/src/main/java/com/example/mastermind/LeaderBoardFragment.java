@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -68,6 +69,7 @@ public class LeaderBoardFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         RecyclerView rV = view.findViewById(R.id.recyclerView);
+        rV.addItemDecoration(new DividerItemDecoration(this.getActivity(), LinearLayout.VERTICAL));
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         ArrayList<User> usersArrayList = new ArrayList<User>();
@@ -103,16 +105,18 @@ public class LeaderBoardFragment extends Fragment {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
                 switch (item.getItemId()) {
-                    case R.id.subjectMenu:
-                        navController.navigate(R.id.action_leaderBoardFragment_to_DifficultyFragment);
-                        break;
+                    case R.id.playScreen:
                     case R.id.homeMenu:
-                        navController.navigate(R.id.action_leaderBoardFragment_to_homeFragment);
+                        navController.navigate(R.id.action_leaderBoardFragment_to_subjectFragment2);
                         break;
+                    case R.id.profileScreen:
+                        navController.navigate(R.id.action_leaderBoardFragment_to_profileFragment);
+
                 }
                 return true;
             }
         });
+
 
 
     }

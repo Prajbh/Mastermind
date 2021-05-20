@@ -23,7 +23,7 @@
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="@+id/linearLayout"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.258" />
+        app:layout_constraintVertical_bias="0.192" />
 
     <TextView
         android:id="@+id/currentUsersName1"
@@ -52,7 +52,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.441">
+        app:layout_constraintVertical_bias="0.3">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/contributeCard"
@@ -160,7 +160,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.129">
+        app:layout_constraintVertical_bias="0.034">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/learnCard"
@@ -268,57 +268,14 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.129">
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/miscCard"
-            android:layout_width="128dp"
-            android:layout_height="128dp"
-            android:layout_margin="8dp"
-            android:layout_marginEnd="16dp"
-            android:clickable="true"
-            android:elevation="12dp"
-            android:focusable="true"
-            android:foreground="?android:attr/selectableItemBackground"
-            app:cardCornerRadius="8dp">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:id="@+id/image_view30"
-                    android:layout_width="130dp"
-                    android:layout_height="103dp"
-                    android:src="@drawable/cover"
-                    app:layout_constraintBottom_toTopOf="@+id/textView30"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="UnknownId" />
-
-                <Button
-                    android:id="@+id/miscellaneous"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="History"
-                    android:textAllCaps="true"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/image_view30" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.cardview.widget.CardView>
+        app:layout_constraintVertical_bias="0.129"/>
 
 
-    </LinearLayout>
+
+
+
+
+
 
     <ImageView
         android:id="@+id/imageView5"
@@ -332,6 +289,51 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.005" />
+
+    <RelativeLayout
+        android:layout_width="117dp"
+        android:layout_height="113dp"
+        android:background="@drawable/white_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/currentUsersName1"
+        app:layout_constraintVertical_bias="0.864">
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="match_parent"
+            android:layout_height="73dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="41dp"
+            android:src="@drawable/ic_baseline_mic_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/currentUsersName1"
+            app:layout_constraintVertical_bias="0.811" />
+
+        <Button
+            android:id="@+id/miscellaneous"
+            android:layout_width="116dp"
+            android:layout_height="45dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="68dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="0dp"
+            android:text="Images"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.895" />
+    </RelativeLayout>
+
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -348,10 +350,6 @@
             app:menu="@menu/bottom_navigation_menu" />
 
     </RelativeLayout>
-
-
-
-
 
 
 

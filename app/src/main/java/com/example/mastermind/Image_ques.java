@@ -78,7 +78,8 @@ public class Image_ques extends Fragment {
         editText = view.findViewById(R.id.speechtext);
         micButton = view.findViewById(R.id.imageButton3);
         speechRecognizer = SpeechRecognizer.createSpeechRecognizer(getContext());
-        textViewScore = view.findViewById(R.id.Score);
+        textViewScore = view.findViewById(R.id.Score1);
+        questionCount = view.findViewById(R.id.questionCounter1);
         buttonConfirmNext = view.findViewById(R.id.confirm1);
         mImageView = view.findViewById(R.id.imageView);
         mImageView.setImageResource(R.drawable.image1);
@@ -184,6 +185,7 @@ public class Image_ques extends Fragment {
             private void showNextQuestion(int counter) {
                 isAnswered = false;
                 if (counter < 6) {
+                    questionCount.setText("Question: " + (counter) + "/5");
                     if (counter == 2) {
                         mImageView.setImageResource(R.drawable.fresh_red_apple_stock_photo_167147);
                         question.setText("What fruit is this?");
@@ -277,7 +279,7 @@ public class Image_ques extends Fragment {
 
 
                 //}
-                textViewScore.setText("Score: " + score + "/");
+                textViewScore.setText("Score: " + score + "/5" );
                 //showSolution(geographyQuest);
                 //Toast.makeText(getActivity(), "the answer is Elephant", Toast.LENGTH_SHORT).show();
 

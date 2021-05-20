@@ -42,7 +42,7 @@ public class Image_ques extends Fragment {
     private TextView textViewScore;
     private int score = 0;
     private ImageView mImageView;
-    private int counter = 0;
+    private int counter = 1;
     NavController navController;
     private TextView questionCount;
     private TextView question;
@@ -185,7 +185,7 @@ public class Image_ques extends Fragment {
             private void showNextQuestion(int counter) {
                 isAnswered = false;
                 if (counter < 6) {
-                    questionCount.setText("Question: " + (counter) + "/5");
+                    //questionCount.setText("Question: " + (counter) + "/5");
                     if (counter == 2) {
                         mImageView.setImageResource(R.drawable.fresh_red_apple_stock_photo_167147);
                         question.setText("What fruit is this?");
@@ -221,6 +221,7 @@ public class Image_ques extends Fragment {
             private void checkAnswers(String ans) {
                 isAnswered = true;
                 //countDownTimer.cancel();
+                questionCount.setText("Question: " + (counter) + "/5");
                 String answer = ans;
                 answer = answer.toLowerCase();
                 if(counter < 6){
@@ -229,6 +230,7 @@ public class Image_ques extends Fragment {
                             //if (optionD.getText().toString().equals(geographyQuest[counter - 1].getAnswer())) {
                             score++;
                             Toast.makeText(getActivity(), "the answer is right", Toast.LENGTH_SHORT).show();
+                            buttonConfirmNext.setText("Next");
                         } else {
                             Toast.makeText(getActivity(), "the answer is wrong", Toast.LENGTH_SHORT).show();
                         }
@@ -238,6 +240,7 @@ public class Image_ques extends Fragment {
                             //if (optionD.getText().toString().equals(geographyQuest[counter - 1].getAnswer())) {
                             score++;
                             Toast.makeText(getActivity(), "the answer is right", Toast.LENGTH_SHORT).show();
+                            buttonConfirmNext.setText("Next");
                         } else {
                             Toast.makeText(getActivity(), "the answer is wrong", Toast.LENGTH_SHORT).show();
                         }
@@ -248,6 +251,7 @@ public class Image_ques extends Fragment {
                             //if (optionD.getText().toString().equals(geographyQuest[counter - 1].getAnswer())) {
                             score++;
                             Toast.makeText(getActivity(), "the answer is right", Toast.LENGTH_SHORT).show();
+                            buttonConfirmNext.setText("Next");
                         } else {
                             Toast.makeText(getActivity(), "the answer is wrong", Toast.LENGTH_SHORT).show();
                         }
@@ -258,6 +262,7 @@ public class Image_ques extends Fragment {
                             //if (optionD.getText().toString().equals(geographyQuest[counter - 1].getAnswer())) {
                             score++;
                             Toast.makeText(getActivity(), "the answer is right", Toast.LENGTH_SHORT).show();
+                            buttonConfirmNext.setText("Next");
                         } else {
                             Toast.makeText(getActivity(), "the answer is wrong", Toast.LENGTH_SHORT).show();
                         }
@@ -269,6 +274,7 @@ public class Image_ques extends Fragment {
                             //if (optionD.getText().toString().equals(geographyQuest[counter - 1].getAnswer())) {
                             score++;
                             Toast.makeText(getActivity(), "the answer is right", Toast.LENGTH_SHORT).show();
+                            buttonConfirmNext.setText("Score");
                         } else {
                             Toast.makeText(getActivity(), "the answer is wrong", Toast.LENGTH_SHORT).show();
                         }

@@ -20,7 +20,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
-import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
@@ -75,10 +74,10 @@ public class LogInFragment extends Fragment {
         userEmail =  view.findViewById(R.id.userName);
         userPass =  view.findViewById(R.id.passWord);
 
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+        /*GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken("619630226950-gks8av6hjdcu3f64kfie0d2c6v1mj7rc.apps.googleusercontent.com")
                 .requestEmail().build();
-        client = GoogleSignIn.getClient(getContext(), gso);
+        client = GoogleSignIn.getClient(getContext(), gso);*/
 
         logInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,13 +119,20 @@ public class LogInFragment extends Fragment {
 
             }
 
-
         });
+        configureSignIn();
     }
     private void signToGoogle() {
         Intent signinIntent = client.getSignInIntent();
         startActivityForResult(signinIntent, SIGNIN);
         //configureSignIn();
+    }
+
+    private void configureSignIn(){
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken("619630226950-gks8av6hjdcu3f64kfie0d2c6v1mj7rc.apps.googleusercontent.com")
+                .requestEmail().build();
+        client = GoogleSignIn.getClient(getContext(), gso);
     }
 
     @Override
@@ -135,14 +141,14 @@ public class LogInFragment extends Fragment {
 
         if (requestCode == SIGNIN) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            //handledSignIn(task);
-            GoogleSignInAccount account = null;
-            try {
-                account = task.getResult(ApiException.class);
-                firebaseauthwithGoogle(account.getIdToken());
-            } catch (ApiException e) {
-                e.printStackTrace();
-            }
+            handledSignIn(task);
+            //GoogleSignInAccount account = null;
+            //try {
+            //    account = task.getResult(ApiException.class);
+            //    firebaseauthwithGoogle(account.getIdToken());
+            //} catch (ApiException e) {
+             //   e.printStackTrace();
+            //}
 
 
         }
@@ -156,19 +162,23 @@ public class LogInFragment extends Fragment {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
 
+
                             //task is successfull
                             //Log.d(TAG, "signInWithCredential:success");
                             //FirebaseUser user = mAuth.getCurrentUser();
 
                         } else {
                             //task not successfull
-                            //Log.w(TAG, "signInWithCredential:failure", task.getException());
+                            Toast.makeText(getActivity(), "Login not Successful", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
     }
 
     private void handledSignIn(Task<GoogleSignInAccount> task) {
+
+        Toast.makeText(getActivity(), "Login Successful", Toast.LENGTH_SHORT).show();
+        navController.navigate(R.id.action_logInFragment_to_subjectFragment2);
 
         try {
             GoogleSignInAccount account = task.getResult();
